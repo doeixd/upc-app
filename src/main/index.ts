@@ -16,7 +16,7 @@ function createWindow(): void {
     // icon: join(__dirname,'../renderer/src/assets/', 'icon2.png'),
     icon,
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '../preload/index.mjs'),
       sandbox: false
     },
   })

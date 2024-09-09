@@ -1,0 +1,46 @@
+.uploadIcon path, .uploadIcon g {
+  stroke-width: 1.1 !important;
+}
+
+.upload-area {
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  cursor: pointer;
+  /* box-sizing: content-box; */
+}
+
+.upload-area.isDragging {
+  background-color: var(--grey-11);
+  border: none;
+}
+
+.upload-area .upload-area__content {
+  background-color: var(--grey-0);
+  z-index: 10;
+}
+
+.upload-area.isDragging .upload-area__content {
+  margin: 11px;
+  border-radius: 10px;
+}
+
+
+.upload-area.isDragging::before {
+  width: 100%;
+  content: ' ';
+  height: 100%;
+  /* background-color: red; */
+  background-image: conic-gradient(red, yellow, green, cyan, blue, magenta, red);
+  animation: rotate 5s linear infinite;
+  position: absolute;
+}
+
+@keyframes rotate {
+  from {
+      transform: rotate(0deg) scale(1.8);
+  }
+  to {
+      transform: rotate(360deg) scale(1.8);
+  }
+}

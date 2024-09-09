@@ -3,15 +3,22 @@ import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import solid from 'vite-plugin-solid'
 import { preload, renderer } from 'unplugin-auto-expose';
 import Pages from 'vite-plugin-pages'
-import { Traverse } from 'neotraverse/modern';
 import Icons from 'unplugin-icons/vite'
+import { Traverse } from 'neotraverse/modern';
+import { lazy } from "solid-js";
 
 export default defineConfig({
   main: {
     plugins: [externalizeDepsPlugin()]
   },
   preload: {
-    plugins: [externalizeDepsPlugin(), preload.vite()]
+    optimizeDeps: {
+      exclude: ['@duckdb/duckdb-wasm'],
+    },
+    plugins: [
+      externalizeDepsPlugin(), 
+      // preload.vite()
+    ]
   },
   renderer: {
     resolve: {
@@ -27,7 +34,14 @@ export default defineConfig({
           new Traverse(routes).nodes().forEach(node => {
             if (node.path) node.path = node.path.replace(/\.page/i, '')
             if (node.path && node.path == 'index') node.path = '/'
+            // if (node.component && typeof node.component == 'string') {
+            //   console.log('before: ', node.component)
+            //   const without = node.component.replace(/\..+$/, '')
+            //   console.log('after: ', without)
+            //   node.component = lazy(() => import(without))
+            // }
           })
+          console.log({routes})
           return routes
         },
         dirs: [{
@@ -36,9 +50,9 @@ export default defineConfig({
           baseRoute: '/',
         }]
       }),
-      renderer.vite({
-        preloadEntry: '/src/preload/index.ts'
-      })
+      // renderer.vite({
+      //   preloadEntry: 'src/preload/index.mjs'
+      // })
     ]
   }
 })

@@ -1,0 +1,103 @@
+
+:root {
+  --c: 0.003; 
+  --h: 96.42; 
+  --a: 1;
+
+
+  --0: 99.8%;
+  --1: 98.99%;
+  --1-5: 97.99%;
+  --2: 96.99%;
+  --3: 92.99%;
+  --4: 88.99%;
+  --5: 83.99%;
+  --6: 76.99%;
+  --6: 66.99%;
+  --7: 55.99%;
+  --8: 40.99%;
+  --9: 32.99%;
+  --10: 25.99%;
+  --11: 15.99%;
+  --11-5: 10.99%;
+  --12: 2%;
+
+  --base-color: oklch(var(--6) var(--c) var(--h) / var(--a));
+
+  --grey-0: oklch(var(--0) var(--c) var(--h) / var(--a));
+  --grey-1: oklch(var(--1) var(--c) var(--h) / var(--a));
+  --grey-1-5: oklch(var(--1-5) var(--c) var(--h) / var(--a));
+  --grey-2: oklch(var(--2) var(--c) var(--h) / var(--a));
+  --grey-3: oklch(var(--3) var(--c) var(--h) / var(--a));
+  --grey-4: oklch(var(--4) var(--c) var(--h) / var(--a));
+  --grey-5: oklch(var(--5) var(--c) var(--h) / var(--a));
+  --grey-6: oklch(var(--6) var(--c) var(--h) / var(--a));
+  --grey-7: oklch(var(--7) var(--c) var(--h) / var(--a));
+  --grey-8: oklch(var(--8) var(--c) var(--h) / var(--a));
+  --grey-9: oklch(var(--9) var(--c) var(--h) / var(--a));
+  --grey-10: oklch(var(--10) var(--c) var(--h) / var(--a));
+  --grey-11: oklch(var(--11) var(--c) var(--h) / var(--a));
+  --grey-11-5: oklch(var(--11-5) var(--c) var(--h) / var(--a));
+  --grey-12: oklch(var(--12) var(--c) var(--h) / var(--a));
+}
+
+@property --0 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --1 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --1-5 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --2 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --3 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --4 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --5 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --6 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --7 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --8 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --9 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --10 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --11 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --11-5 {
+  syntax: '<percentage>';
+  inherits: true;
+}
+@property --12 {
+  syntax: '<percentage>';
+  inherits: true;
+}

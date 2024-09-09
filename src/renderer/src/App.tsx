@@ -7,6 +7,7 @@ import { createSignal, onMount } from "solid-js";
 import { clientOnly } from "@solidjs/start";
 // import upcs from "../api/upc_data.json"
 import { upperFirst } from 'scule'
+import { electron } from './utils/api';
 
 function handleGo () {
   console.log('clicked')
@@ -19,7 +20,8 @@ const App: ParentComponent = (props) => {
       <img src="/src/assets/icon2.png" />
     </div>
     <div class="header__buttonBox" onClick={() => {
-      window.electron.ipcRenderer.send('close-window')
+      // console.log({API})
+      electron.ipcRenderer.send('close-window')
     }}>
       <div class="header__close">&times;</div>
     </div>

@@ -18,7 +18,7 @@
         "src/renderer/src/*"
       ],
       "#preload": [
-        "/path/to/preload"
+        "src/preload/index.mjs"
       ]
     }
   }
