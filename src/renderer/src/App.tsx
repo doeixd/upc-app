@@ -1,19 +1,25 @@
 import type { Component, ParentComponent } from 'solid-js'
 import Versions from './components/Versions'
 import logo from './assets/logo.svg'
-import { createAsync, type RouteDefinition } from "@solidjs/router";
+import { createAsync, useLocation, useNavigate, type RouteDefinition } from "@solidjs/router";
 import { TextField } from "@kobalte/core/text-field";
-import { createSignal, onMount } from "solid-js";
+import { createMemo, createSignal, onMount, Show, Suspense } from "solid-js";
 import { clientOnly } from "@solidjs/start";
 // import upcs from "../api/upc_data.json"
 import { upperFirst } from 'scule'
 import { electron } from './utils/api';
+import TablerArrowBackUp from '~icons/tabler/arrow-back-up'
 
 function handleGo () {
   console.log('clicked')
 }
 
 const App: ParentComponent = (props) => {
+  const navigate = useNavigate()
+  const location = useLocation();
+
+  const pathname = createMemo(() =>(location.pathname));
+  console.log('PATHNAME: ', pathname)
   return (<>
   <div class="header">
     <div class="icon">
@@ -28,8 +34,17 @@ const App: ParentComponent = (props) => {
     </div>
     <div class="side-padding px-[32px]">
     <div class="container">
+      <Show when={pathname() !== '/' }>
+        <button class="back-button" onClick={() => navigate(-1)} title="Back">
+          <div class="back-button-backdrop"></div>
+        <TablerArrowBackUp></TablerArrowBackUp> 
+
+        </button>
+      </Show>
       <main class="w-full py-5 px-8">
-        {props.children}
+        <Suspense fallback={'Loading...'}>
+          {props.children}
+        </Suspense>
       </main>
     </div>
     </div>

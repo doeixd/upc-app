@@ -5,14 +5,14 @@ import { createEffect, createSignal } from 'solid-js'
 import { debounce } from '@solid-primitives/scheduled';
 
 import './indexPage.css'
-import { DuckDBDataProtocol } from '@duckdb/duckdb-wasm';
 import { db } from '@renderer/utils/duckdb';
 import * as api from '@renderer/utils/api'
-import { setCurrent } from '@renderer/utils/global';
+import { setCurrentFile, setDb, UploadFile, createBackButton} from '@renderer/utils/global';
 import { Route, useNavigate } from '@solidjs/router';
 
 export default function Index() {
   const navigate = useNavigate()
+  const backButton = createBackButton()
 
   return (
     <div class="flex flex-col items-center place-content-center pt-[33px]  w-full">
@@ -37,21 +37,15 @@ function UploadArea(props) {
   createEffect(async () => {
     console.log('DND FILES', files())
     if (files().length) {
-      for (let file of files()) {
-        console.log('full', window.webUtils.getPathForFile(file.file))
-        console.log(window.db)
-        // const text = api.readFile(file.path)
-        db.registerFileHandle(file.name, file.file, DuckDBDataProtocol.BROWSER_FILEREADER, true)
-        const conn = await db.connect()
-        const result = JSON.parse((await conn.query(`describe SELECT * FROM '${file.name}'`)).toString())
-        // console.log(result.toArray(), result.toString())
-        console.log(result)
-        setCurrent(db)
-        props.navigate('/table', {scroll: true})
-       
-        // const res = await conn.query(`from sniff_csv('${file.name}')`)
-        // console.log(res.toString())
-      }
+      // for (let file of files()) {
+        const file: UploadFile | undefined = files().at(0)
+        if (file) {
+          file.path = window.webUtils.getPathForFile(file.file)
+          setDb(db)
+          setCurrentFile(file)
+
+          props.navigate('/table', {scroll: true})
+        }
     }
   })
 

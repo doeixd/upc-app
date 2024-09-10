@@ -154,3 +154,96 @@ h1 {
   filter: saturate(3);
 }
 
+.back-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--grey-4);
+  position: relative;
+  left: 1.1rem;
+  top: 0.9rem;
+  border-radius: 50px;
+  padding: 5px;
+  transition: none;
+
+  /* border-width: 2px;
+  border-style: solid;
+  border-image-repeat:stretch;
+  border-image: conic-gradient(red, yellow, green, cyan, blue, magenta, red); */
+}
+
+.back-button-backdrop {
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
+
+.back-button:hover .back-button-backdrop {
+  /* background-color: var(--grey-2); */
+  background-image: conic-gradient(red, yellow, green, cyan, blue, rgb(255, 0, 208), red); 
+  animation: rotateButton 2.5s linear alternate-reverse infinite;
+  /* transition: none; */
+}
+
+.back-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button-backdrop::after {
+  border-radius: 50px;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.2);
+  content: ' ';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  /* background-color: red; */
+  background-color: #fdfdfb;
+}
+.back-button:hover .back-button-backdrop::after {
+  background-color: var(--grey-1);
+  animation: rotateOther 300ms linear;
+  animation-fill-mode: forwards;
+  /* animation-delay: 50ms; */
+  transform: scale(0.9)
+  /* transition: none; */
+}
+
+.back-button:hover svg {
+  /* background-color: var(--grey-0); */
+  color: var(--grey-10);
+  transition: none;
+}
+
+.back-button svg g {
+  stroke-width: 1.1;
+  transition: none;
+  /* transform:  scale(1.05) t */
+}
+
+@keyframes rotateOther {
+  from {
+      transform: rotate(0deg) scale(1.2);
+  }
+  to {
+      transform: rotate(-360deg) scale(0.83);
+  }
+}
+@keyframes rotateButton {
+  from {
+      transform: rotate(0deg) scale(1.05);
+  }
+  to {
+      transform: rotate(360deg) scale(1.05);
+  }
+}
