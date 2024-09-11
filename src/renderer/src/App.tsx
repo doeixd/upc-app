@@ -33,7 +33,7 @@ const App: ParentComponent = (props) => {
     </div>
     </div>
     <div class="side-padding px-[32px]">
-    <div class="container">
+    <div class="container h-full relative">
       <Show when={pathname() !== '/' }>
         <button class="back-button" onClick={() => navigate(-1)} title="Back">
           <div class="back-button-backdrop"></div>
@@ -41,14 +41,26 @@ const App: ParentComponent = (props) => {
 
         </button>
       </Show>
-      <main class="w-full py-5 px-8">
-        <Suspense fallback={'Loading...'}>
+      <main class="w-full py-5 px-8 absolute top-0 h-full">
+        <Suspense fallback={<Loading />}>
           {props.children}
         </Suspense>
       </main>
     </div>
     </div>
   </>)
+}
+
+function Loading () {
+  return (
+    <div class="loading" style="display: grid; width: 100%; height: 100%; place-content: center;">
+      <div class="rainbow">
+        <div class="lbackground">
+          Loading
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default App

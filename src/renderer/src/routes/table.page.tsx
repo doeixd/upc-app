@@ -1,4 +1,4 @@
-import { allData, createGetId, currentFileDescription, db, first100, tanstackTableColumnDefsForCurrentTable } from '@renderer/utils/global';
+import { allData, createGetId, currentFileDescription, db, sample, tanstackTableColumnDefsForCurrentTable } from '@renderer/utils/global';
 import { useNavigate } from '@solidjs/router';
 import { createSolidTable, flexRender, getCoreRowModel } from '@tanstack/solid-table';
 import { createEffect, createMemo, For } from 'solid-js';
@@ -9,24 +9,30 @@ export default function TablePage() {
   const navigate = useNavigate()
 
   return (
-    <div class="flex flex-col items-center place-content-center mt-[-1.8rem]  w-full">
-      <h1 class="font-bold" style='font-size: 2.4rem'>Your data</h1>
+    <div class="flex flex-col items-center mt-[-0.25rem]  w-full h-full">
+      <h1 class="font-bold" style='font-size: 1.6rem; opacity: 0.1; font-weight: 600; letter-spacing: 1px'>Your data</h1>
       <p style='opacity: 0.7; max-width: 30ch; text-align: center; padding-top: 1px; font-size: 1.1rem'></p>
       <div class="py-[17px]">  </div>
-      <Toolbar></Toolbar>
+      <Toolbar navigate={navigate} ></Toolbar>
       <Table />
     </div>
   )
 }
 
 
-function Toolbar () {
+function Toolbar (props) {
   return (
     <div class="pb-5">
-      <button class="add-button">
-        Add
-        <HugeiconsAddSquare />
-      </button>
+      <a href="/add" class="contents">
+        <button class="add-button">
+          <div class="add-button__content">
+            Add
+            <HugeiconsAddSquare />
+          </div>
+          <div class="add-button__rainbow"></div>
+          <div class="add-button__background"></div>
+        </button>
+      </a>
 
 
     </div>
@@ -49,7 +55,7 @@ function Table () {
   const table = createMemo(() => {
     return createSolidTable({
       get data() {
-        return first100() || []
+        return sample() || []
       },
       columns: tanstackTableColumnDefsForCurrentTable(),
       getCoreRowModel: getCoreRowModel()

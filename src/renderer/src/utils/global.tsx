@@ -9,6 +9,7 @@ import {
   createSolidTable,
 } from '@tanstack/solid-table'
 import { titleCase } from "scule";
+import epc from 'epc-tds'
 
 
 
@@ -56,17 +57,17 @@ export const currentFileDescription = createAsync<DescriptionObj[]>(async () => 
   if (file && connection) {
       let result = (await connection.query(`describe SELECT * FROM '${file.name}'`))
       let arrayResult = result.toArray().map(v => Object.fromEntries(Object.entries(v)))
-      console.log({result, arrayResult})
+      // console.log({result, arrayResult})
       return arrayResult
   }
 })
 
-export const first100 = createAsync(async () => {
+export const sample = createAsync(async () => {
   const file = currentFile()
   const connection = conn()
   if (!(file && connection)) return;
 
-  let result = (await connection.query(`SELECT * FROM '${file.name}' limit 100`))
+  let result = (await connection.query(`SELECT * FROM '${file.name}' USING SAMPLE reservoir(4%)`))
   let arrayResult = result.toArray().map(v => Object.fromEntries(Object.entries(v)))
 
   return arrayResult
@@ -181,7 +182,7 @@ function* contiguousCombinations<T extends unknown[]>(arr: T, limit = 4) {
 export const createGetId = createMemo(() => {
   const desc = currentFileDescription()
 
-  const items = first100()
+  const items = sample()
 
   if (!items || !desc) return;
 
@@ -191,7 +192,7 @@ export const createGetId = createMemo(() => {
     const numberPart = () => items.map(item => {
       let result = ''
       for (let descriptor of combo) {
-        console.log({item, columnName: descriptor.column_name, value: item[descriptor.column_name]})
+        // console.log({item, columnName: descriptor.column_name, value: item[descriptor.column_name]})
         const number = (String(item?.[descriptor.column_name] || '').match(/\d+/g) || []).join('')
         if (number && !descriptor.column_name.includes('date')) result += number;
       }
@@ -209,6 +210,10 @@ export const createGetId = createMemo(() => {
         //   number,
         //   couldBeGTIN: couldBeGTIN(number) && number.length > 10
         // })
+        try { 
+        if (number) console.log("EPC ", epc.valueOf(number))
+        } catch(e) {};
+
         if (couldBeGTIN(number || '') && (number || '').length > 8) return true
         return false
       })
@@ -277,7 +282,7 @@ export const tanstackTableColumnDefsForCurrentTable = createMemo(() => {
 
   const getId = createGetId()
 
-  const items = first100()
+  const items = sample()
   let header = 'UPC'
   let idColumns: DescriptionObj[]  = []
 
@@ -319,7 +324,7 @@ export const tanstackTableColumnDefsForCurrentTable = createMemo(() => {
 
   function getCell(description: DescriptionObj) {
     return (info: unknown) => {
-      console.log({info, description, value: info?.[description?.column_name] || '', getValue: info?.getValue?.()})
+      // console.log({info, description, value: info?.[description?.column_name] || '', getValue: info?.getValue?.()})
       return (<div class="table-cell-content">{info?.getValue() || ''}</div>)
     }
   }
@@ -340,7 +345,26 @@ export function createBackButton() {
 
   useBeforeLeave((e) => {
     setLastPage(e.from)
-    console.log(e.from.pathname, e.from.query, e.from.search)
+    // console.log(e.from.pathname, e.from.query, e.from.search)
   })
+
+}
+
+
+
+export function determineBrands () {
+  const items = sample()
+  const getId = createGetId()
+
+  for (let item of items) {
+
+  }
+
+
+
+
+
+
+
 
 }

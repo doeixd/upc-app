@@ -32,16 +32,16 @@
   --grey-2-5: oklch(var(--2-5) var(--c) var(--h) / var(--a));
   --grey-3: oklch(var(--3) var(--c) var(--h) / var(--a));
   --grey-4: oklch(var(--4) var(--c) var(--h) / var(--a));
-  --grey-5: oklch(var(--5) var(--c) var(--h) / var(--a));
-  --grey-6: oklch(var(--6) var(--c) var(--h) / var(--a));
-  --grey-6-5: oklch(var(--6-5) var(--c) var(--h) / var(--a));
-  --grey-7: oklch(var(--7) var(--c) var(--h) / var(--a));
-  --grey-8: oklch(var(--8) var(--c) var(--h) / var(--a));
-  --grey-9: oklch(var(--9) var(--c) var(--h) / var(--a));
-  --grey-10: oklch(var(--10) var(--c) var(--h) / var(--a));
-  --grey-11: oklch(var(--11) var(--c) var(--h) / var(--a));
-  --grey-11-5: oklch(var(--11-5) var(--c) var(--h) / var(--a));
-  --grey-12: oklch(var(--12) var(--c) var(--h) / var(--a));
+  --grey-5: oklch(var(--5) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-6: oklch(var(--6) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-6-5: oklch(var(--6-5) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-7: oklch(var(--7) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-8: oklch(var(--8) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-9: oklch(var(--9) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-10: oklch(var(--10) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-11: oklch(var(--11) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-11-5: oklch(var(--11-5) calc(var(--c) + 0.001) var(--h) / var(--a));
+  --grey-12: oklch(var(--12) calc(var(--c) + 0.001) var(--h) / var(--a));
 }
 
 @property --0 {

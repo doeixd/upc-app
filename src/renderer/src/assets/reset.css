@@ -33,3 +33,38 @@ html {
   cursor: pointer;
   text-decoration: underline;
 }
+
+
+
+/* Styling for standard scrollbars */
+* {
+  /* scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1; */
+}
+
+
+/* Styling for webkit browsers */
+:is(*)::-webkit-scrollbar {
+  --thumb-size: 6px;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border-top-right-radius: 60px;
+  border-bottom-right-radius: 60px;
+}
+
+
+:is(*)::-webkit-scrollbar-track {
+  background: var(--grey-1);
+  border-top-right-radius: 60px;
+  border-bottom-right-radius: 60px;
+}
+
+:is(*)::-webkit-scrollbar-thumb {
+  background: var(--grey-3);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+:is(*)::-webkit-scrollbar-thumb:hover {
+  background: var(--grey-6);
+}
