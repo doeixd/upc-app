@@ -1,12 +1,26 @@
 import { allData, createGetId, currentFileDescription, db, sample, tanstackTableColumnDefsForCurrentTable } from '@renderer/utils/global';
 import { useNavigate } from '@solidjs/router';
 import { createSolidTable, flexRender, getCoreRowModel } from '@tanstack/solid-table';
-import { createEffect, createMemo, For } from 'solid-js';
+import { createEffect, createMemo, For, Suspense } from 'solid-js';
 import './tablePage.css'
 import HugeiconsAddSquare from '~icons/hugeicons/add-square'
+import epc from 'epc-tds'
 
 export default function TablePage() {
   const navigate = useNavigate()
+  // const getId = createGetId()
+  // for (let item of sample() || []) {
+  //   const number = getId?.(item) || {raw: '', formatted: ''}
+  //   var epc_value;
+  //   try { 
+  //     let n = number?.formatted?.replace(/\s+/g, '')
+  //     epc_value = epc.valueOf(n)
+  //   } catch(e) {
+  //     console.log(e)
+  //   };
+    
+  //   console.log('EPC VALUE', epc_value, 'formatted', number?.formatted?.replace(/\s+/g, ''))
+  // }
 
   return (
     <div class="flex flex-col items-center mt-[-0.25rem]  w-full h-full">
@@ -14,11 +28,24 @@ export default function TablePage() {
       <p style='opacity: 0.7; max-width: 30ch; text-align: center; padding-top: 1px; font-size: 1.1rem'></p>
       <div class="py-[17px]">  </div>
       <Toolbar navigate={navigate} ></Toolbar>
-      <Table />
+      {/* <Suspense fallback={<Loading />}> */}
+        <Table />
+      {/* </Suspense> */}
     </div>
   )
 }
 
+function Loading () {
+  return (
+    <div class="loading" style="display: grid; width: 100%; height: 100%; place-content: center;">
+      <div class="rainbow">
+        <div class="lbackground">
+          Loading
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function Toolbar (props) {
   return (
@@ -55,7 +82,7 @@ function Table () {
   const table = createMemo(() => {
     return createSolidTable({
       get data() {
-        return sample() || []
+        return (sample() || []).slice(100) || []
       },
       columns: tanstackTableColumnDefsForCurrentTable(),
       getCoreRowModel: getCoreRowModel()
@@ -65,7 +92,7 @@ function Table () {
   
 
   return (
-    <div class="main-table-holder">
+    <div class="main-table-holder no-transition">
       <table class="main-table" style={`--columns: ${size()}`}>
         <thead>
           <For each={table().getHeaderGroups()}>

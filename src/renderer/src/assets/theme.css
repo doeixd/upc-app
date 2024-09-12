@@ -23,8 +23,12 @@
   --11-5: 10.99%;
   --12: 2%;
 
+  --gold: oklch(0.89 0.21 94 / 1);
+  --magenta: oklch(63.2% 0.2089 0);
+
   --base-color: oklch(var(--6) var(--c) var(--h) / var(--a));
 
+  --white: oklch(99.999% var(--c) var(--h) / var(--a));
   --grey-0: oklch(var(--0) var(--c) var(--h) / var(--a));
   --grey-1: oklch(var(--1) var(--c) var(--h) / var(--a));
   --grey-1-5: oklch(var(--1-5) var(--c) var(--h) / var(--a));

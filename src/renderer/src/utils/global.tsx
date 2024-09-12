@@ -1,6 +1,6 @@
 import { createSignal, createMemo, createEffect } from "solid-js";
 import { DuckDBDataProtocol } from '@duckdb/duckdb-wasm';
-import { createAsync, useBeforeLeave } from "@solidjs/router";
+import { createAsync, useBeforeLeave, cache } from "@solidjs/router";
 import { couldBeGTIN, formatGTIN, parseGTINFormat } from "@chumsinc/gtin-tools";
 import {
   flexRender,
@@ -10,6 +10,7 @@ import {
 } from '@tanstack/solid-table'
 import { titleCase } from "scule";
 import epc from 'epc-tds'
+import { extractCompanyPrefix } from "./upc";
 
 
 
@@ -67,7 +68,7 @@ export const sample = createAsync(async () => {
   const connection = conn()
   if (!(file && connection)) return;
 
-  let result = (await connection.query(`SELECT * FROM '${file.name}' USING SAMPLE reservoir(4%)`))
+  let result = (await connection.query(`SELECT * FROM '${file.name}' USING SAMPLE reservoir(25%)`))
   let arrayResult = result.toArray().map(v => Object.fromEntries(Object.entries(v)))
 
   return arrayResult
@@ -185,6 +186,8 @@ export const createGetId = createMemo(() => {
   const items = sample()
 
   if (!items || !desc) return;
+  const notes_idx =desc.findIndex(c => c.column_name == 'notes') 
+  if (notes_idx !== -1) desc.splice(notes_idx, 1);
 
   const upcColumns: DescriptionObj[] = []
 
@@ -194,31 +197,32 @@ export const createGetId = createMemo(() => {
       for (let descriptor of combo) {
         // console.log({item, columnName: descriptor.column_name, value: item[descriptor.column_name]})
         const number = (String(item?.[descriptor.column_name] || '').match(/\d+/g) || []).join('')
+
         if (number && !descriptor.column_name.includes('date')) result += number;
       }
       if (result) return result
       return undefined
     }).filter(Boolean);
 
-    console.log(numberPart())
+    // console.log(numberPart())
 
     const areAllEmptyOrUpc = () => {
       if (!(numberPart().length > 1)) return false
       return numberPart().every(number => {
-        // if (!number) return true
-        // console.log({
-        //   number,
-        //   couldBeGTIN: couldBeGTIN(number) && number.length > 10
-        // })
+        if (!number) return false
+        console.log({
+          number,
+          couldBeGTIN: couldBeGTIN(number) && number.length > 10
+        })
         try { 
-        if (number) console.log("EPC ", epc.valueOf(number))
+          if (number) console.log("EPC ", epc.valueOf(number), 'number', number, 'numberPart', numberPart())
         } catch(e) {};
 
         if (couldBeGTIN(number || '') && (number || '').length > 8) return true
         return false
       })
     }
-    console.log('areAllEmptyOrUPC', areAllEmptyOrUpc())
+    console.log('areAllEmptyOrUPC', areAllEmptyOrUpc(), combo)
 
     const gotRightColumns = areAllEmptyOrUpc()
 
@@ -238,10 +242,13 @@ export const createGetId = createMemo(() => {
       value: string,
       column: DescriptionObj 
     }
+    // console.log('UPC COLUMNs', upcColumns)
 
     for (let upcColumn of upcColumns) {
       const og = String(obj?.[upcColumn.column_name] || '')
       const part = (og.match(/\d+/g) || []).join('')
+      // console.log('og', og, 'part', part, 'parts', parts)
+
       if (part) {
         parts.push({
           originalValue: og,
@@ -352,19 +359,32 @@ export function createBackButton() {
 
 
 
-export function determineBrands () {
-  const items = sample()
+export const determineBrands = createAsync(async function () {
+  const connection = conn()
+  const file = currentFile()
   const getId = createGetId()
 
-  for (let item of items) {
+  if (!connection || !file || !getId) return [];
 
+  const data = await connection.query(`SELECT DISTINCT ON (brand) * FROM ${ file.name } ORDER BY brand;`)
+  
+  let result: {brand: string, companyCode: string}[] = []
+
+  console.log('BRANDS DATA', data.toString())
+  for (let item of data.toArray()) {
+    let id: any = getId(item)
+    console.log('ID before', id)
+    id = id.formatted.replace(/\s+/g, '')
+    console.log('ID after', id)
+    const parent = extractCompanyPrefix(id)
+
+    result.push({
+      brand: item.brand,
+      companyCode: parent,
+    })
   }
 
+  console.log(`result`, result)
 
-
-
-
-
-
-
-}
+  return result
+})

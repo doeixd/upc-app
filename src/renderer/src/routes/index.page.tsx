@@ -9,6 +9,7 @@ import { db } from '@renderer/utils/duckdb';
 import * as api from '@renderer/utils/api'
 import { setCurrentFile, setDb, UploadFile, createBackButton} from '@renderer/utils/global';
 import { Route, useNavigate } from '@solidjs/router';
+import { triggerDropEvent } from '@renderer/utils/triggerDropEvent';
 
 export default function Index() {
   const navigate = useNavigate()
@@ -35,8 +36,11 @@ function UploadArea(props) {
   const setIsDragging = debounce((value: boolean) => setIsDraggingOg(value), 50);
   
   createEffect(async () => {
+    console.log('input value', inputRef.files)
+    console.log('INPUT PROPS', getInputProps())
     console.log('DND FILES', files())
     if (files().length) {
+      
       // for (let file of files()) {
         const file: UploadFile | undefined = files().at(0)
         if (file) {
@@ -73,7 +77,9 @@ function UploadArea(props) {
         <div class='block py-[6.5px]'></div>
         <h2 style='letter-spacing: -1px; font-weight: 600; font-size: 2.6rem; text-align:center; color: oklch(0.92 0.008 94.5 / 0.76)'>Drop file here</h2>
       </div>
-      <input type="file" id="fileElem" multiple accept="*" style="display:none" {...getInputProps()} ref={inputRef}></input>
+      <input type="file" id="fileElem" multiple accept="*" style="display:none" onChange={(e) => triggerDropEvent(e.target, e.target.files)} ref={inputRef}></input>
     </div>
   )
 }
+
+

@@ -1,0 +1,195 @@
+.field {
+  margin-bottom: 23px;
+
+  label {
+    text-transform: capitalize;
+    transform: translate(0.8px);
+    font-size: 0.99em;
+    padding-bottom: 2.5px;
+    letter-spacing: 0.2px;
+    color: var(--grey-8)
+  }
+
+  input[data-text-input], textarea {
+    background-color: var(--white);
+    display: block;
+    border: 0.8px solid var(--grey-5);
+    border-radius: 6px;
+    padding: 8px;
+    padding-left: 10px;
+    font-size: 1.1em;
+    min-width: 31ch;
+  }
+
+  .field-error, .field-error a {
+    padding-left: 2px;
+    padding-top: 1px;
+    color: oklch(45.3% 0.1702 20.09);
+
+    a:hover {
+        filter:brightness(1.1)
+    }
+  }
+
+  
+
+}
+
+.img-preview-holder {
+  max-height: 300px;
+  background-color: var(--grey-1-5);
+  border-radius: 20px;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  padding: 50px;
+  position: relative;
+
+  .trash-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--grey-5);
+    cursor: pointer;
+    border-radius: 100%;
+    padding: 8px;
+    box-sizing: content-box;
+    transition: all 100ms linear;
+
+    &:hover {
+      --a: 0.2;
+      background-color: oklch(from var(--grey-3) l c h / 0.6);
+      color: var(--grey-7);
+
+    }
+  }
+
+  img {
+    max-height: 200px;
+  }
+}
+
+@keyframes rotateButton4 {
+  from {
+      transform: rotate(0deg) scale(4.4);
+  }
+  to {
+      transform: rotate(360deg) scale(4.4);
+  }
+}
+
+
+@property --delay {
+  syntax: '<time>';
+}
+
+@property --bg-color {
+  syntax: '<color>';
+}
+
+.add-button2 {
+  margin-top: 4em;
+  margin-bottom: 3em;
+  width: 200px;
+
+  --border-radius: 12px;
+  --bg-color: var(--gold);
+  --bg-color-hover: var(--grey-1);
+  --inset-amount: 4px;
+  --fg-color: oklch(from var(--gold) var(--11) c h);
+  --fg-color-hover: var(--grey-8);
+  --delay: 150ms;
+  /* box-sizing: border-box; */
+  align-items: center;
+  border-width: 0;
+  border: none;
+  /* transition: none; */
+  border-radius: var(--border-radius);
+  /* background-color: oklch(from var(--bg-color) l c h / 0.1); */
+  background-color: transparent;
+  /* border-color: transparent; */
+  /* border-color: green; */
+  position: relative;
+  z-index: 2;
+  overflow: clip;
+  /* border-style: solid; */
+  /* transition: none; */
+  justify-content: center;
+  transition: background-color 0 linear;
+
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  box-sizing: content-box;
+
+
+  :is(.add-button__content, .add-button__background, .add-button__rainbow) {
+    display: flex;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    height:100%;
+    width: 100%;
+  }
+
+  .add-button__content {
+    background-color: transparent;
+    color: var(--fg-color);
+    font-size: 1.38em;
+    font-weight: 500;
+    z-index: 2; 
+    padding: 10px 20px;
+    display: flex;
+    gap: 11px;
+    justify-content: center;
+    transition: all var(--delay) linear;
+    width: 100%;
+  }
+
+  .add-button__background {
+    background-color: oklch(from var(--bg-color) l calc(c + 0.001) h / 1);
+    transition: 
+      color var(--delay) linear,
+      clip-path var(--delay) linear,
+      background-color var(--delay) linear;
+    clip-path: inset(0);
+  }
+
+  &:hover {
+    .add-button__content {
+      color: var(--fg-color-hover);
+      z-index: 1;
+    }
+
+    .add-button__rainbow {
+      background-image: conic-gradient(red, yellow, green, cyan, blue, #fe08fe, red); 
+      animation: rotateButton4 2.5s linear alternate-reverse infinite;
+    }
+
+    .add-button__background {
+      clip-path: inset(var(--inset-amount) round calc(var(--border-radius) - (var(--inset-amount) - 0.2px))); 
+      background-color: var(--bg-color-hover);
+    }
+  }
+
+
+  svg {
+    display: inline;
+    transform: scale(0.88) translateX(7px) translateY(3px);
+    transition: none;
+
+    path {
+      transition: none;
+      stroke-width: 1.5;
+    }
+    /* transform: translateY(-1px); */
+  }
+}
+
+
+
+.add-page {
+  font-size: 12.5px;
+}

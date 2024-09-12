@@ -1,4 +1,7 @@
 import type { Config } from 'tailwindcss';
+import kobalte from '@kobalte/tailwindcss'
+// import pigment from '@kobalte/pigment-tailwind-preset'
+
 
 const config: Config = {
   content: [
@@ -27,7 +30,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    kobalte,
+    // pigment.preset()
+  ],
 };
 
 export default config;
