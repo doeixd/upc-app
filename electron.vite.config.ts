@@ -6,6 +6,7 @@ import Pages from 'vite-plugin-pages'
 import Icons from 'unplugin-icons/vite'
 import { Traverse } from 'neotraverse/modern';
 import { lazy } from "solid-js";
+import { patchCssModules } from 'vite-css-modules';
 
 export default defineConfig({
   main: {
@@ -26,8 +27,12 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
+    build: {
+      target: 'esnext'
+    },
     plugins: [
       solid(),
+      patchCssModules(),
       Icons({compiler: 'solid'}),
       Pages({
         onRoutesGenerated: (routes) =>{

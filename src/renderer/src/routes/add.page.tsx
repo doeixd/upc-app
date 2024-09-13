@@ -1,21 +1,22 @@
-import { conn, currentFile, currentFileDescription, db, determineBrands, setCurrentFile, setDb, tanstackTableColumnDefsForCurrentTable, UploadFile } from "@renderer/utils/global"
-import { createForm } from "@modular-forms/solid"
+import { conn, currentFile, currentFileDescription, db, determineBrands, determineMarketplaces, setCurrentFile, setDb, tanstackTableColumnDefsForCurrentTable, UploadFile } from "@renderer/utils/global"
+import { createForm, setValue } from "@modular-forms/solid"
 import { createEffect, createSignal, For, Show } from "solid-js"
-import { Combobox } from "@kobalte/core/combobox";
-import HugeiconsCheckmarkCircle03 from '~icons/hugeicons/checkmark-circle-03'
 import HugeiconsSorting05 from '~icons/hugeicons/sorting-05'
 import './addPage.css'
 import style from '../assets/combobox.module.css'
 import { debounce } from "@solid-primitives/scheduled";
 import createDropzone from "solid-dzone";
+import { triggerDropEvent } from "@renderer/utils/triggerDropEvent";
 import MageFileUpload from '~icons/mage/file-upload'
+import HugeiconsCheckmarkCircle03 from '~icons/hugeicons/checkmark-circle-03'
 import MageCaretDownFill from '~icons/mage/caret-down'
 import MageChevronDown from '~icons/mage/chevron-down'
-import { useNavigate } from "@solidjs/router";
 import MageTrash from '~icons/mage/trash'
 import HugeiconsAddSquare from '~icons/hugeicons/add-square'
-import { triggerDropEvent } from "@renderer/utils/triggerDropEvent";
+import { useNavigate } from "@solidjs/router";
 import { unwrap } from "solid-js/store";
+import { titleCase } from "scule";
+import { Combobox } from "@renderer/components/Combobox"
 
 console.log({style})
 
@@ -32,7 +33,7 @@ export default function AddPage() {
   )
 }
 
-function determineInput(columnName, field, props, navigate) {
+function determineInput(columnName, field, props, navigate, form) {
 
   let Label = <label style="display: block;" for={field.name}>{columnName}</label>
   let Input = <input data-text-input {...props} class="inputShadow" type="text"  />
@@ -51,52 +52,28 @@ function determineInput(columnName, field, props, navigate) {
   }
 
   if (['img', 'image'].includes(field.name.toLowerCase())) {
-    Input = UploadArea({navigate})
+    Input = UploadArea({navigate, field, props, form})
 
   }
 
   if (field.name == 'brand') {
-    const brands = determineBrands()
+    const brands = determineBrands() || [] as {brand: string, companyCode: string}[]
     Input = (
-		<Combobox
-			options={brands || []}
-			optionValue="brand"
-			optionTextValue="brand"
-			optionLabel="brand"
-			// placeholder="Brand"
-      data-combobox="true"
-			itemComponent={props => (
-				<Combobox.Item item={props.item} class={style.combobox__item} data-item='item'>
-					<Combobox.ItemLabel>{props.item.rawValue.brand}</Combobox.ItemLabel>
-					<Combobox.ItemIndicator class={style["combobox__item-indicator"]}>
-						<HugeiconsCheckmarkCircle03/>
-					</Combobox.ItemIndicator>
-				</Combobox.Item>
-			)}
-			sectionComponent={props => (
-				<Combobox.Section class={style.combobox__section}>{props.section.rawValue.brand}</Combobox.Section>
-			)}
-		>
-			<Combobox.Control aria-label="Brands" class={[style.combobox__control, 'inputShadow'].join(' ')}>
-				<Combobox.Input class={style.combobox__input} data-combo-input="true" />
-				<Combobox.Trigger class={style.combobox__trigger} data-combo-trigger="true">
-					<Combobox.Icon class={style.combobox__icon}>
-            {/* <HugeiconsSorting05 /> */}
-            {/* <MageCaretDownFill /> */}
-            <MageChevronDown />
-					</Combobox.Icon>
-				</Combobox.Trigger>
-			</Combobox.Control>
-			<Combobox.Portal>
-				<Combobox.Content data-thing="thing" class={style.combobox__content}>
-					<Combobox.Listbox class={style.combobox__listbox} />
-				</Combobox.Content>
-			</Combobox.Portal>
-		</Combobox>
-	)
+      <Combobox<{brand: string, companyCode: string}>
+        options={brands}
+        optionValue="brand"
+        optionTextValue="brand"
+        optionLabel="brand"
+        name="brand"
+        />
+    )
+  }
 
 
+  if (field.name == 'marketplace') {
+    const marketplaces = [...new Set((determineMarketplaces() || []).map(m => { return titleCase((m?.marketplace || '').replace(/\s+/g, '')) }))]
 
+    Input = <Combobox options={marketplaces} name="marketplace" />
   }
 
 
@@ -125,16 +102,20 @@ function Form (formProps) {
 
   let brands = determineBrands()
 
+  function handleSubmit(event) {
+    console.log('SUBMITTED', event)
+  }
+
   return (
     <div class="form-holder">
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <For each={columnNames}>
           {(columnName) => {
             return (
-              <Field name={columnName} validate={determineValidator(columnName)} validateOn='blur' >
+              <Field name={columnName} validate={determineValidator(columnName)} validateOn='blur' type={determineType(columnName)}>
                 {(field, props) => (
                 <div class="field">
-                  { determineInput(columnName, field, props, formProps?.navigate) }
+                  { determineInput(columnName, field, props, formProps?.navigate, form) }
                   {field.error && <div>{field.error}</div>}
                 </div>)}
               </Field>
@@ -156,7 +137,7 @@ function Form (formProps) {
 
 
 
-function UploadArea(props) {
+function UploadArea(args) {
   let inputRef!: HTMLInputElement
   let rootRef!: HTMLDivElement
 
@@ -178,6 +159,7 @@ function UploadArea(props) {
           const dataURL = reader.readAsDataURL(file.file)
           console.log('dataURL', dataURL)
           setPreviewSrc(file.source)
+          setValue(args.form, args.field.name, file.file)
         }
     }
   })
@@ -209,7 +191,7 @@ function UploadArea(props) {
             <div class='block py-[6.5px]'></div>
             <h2 style='letter-spacing: -1px; font-weight: 600; font-size: 2.6em; text-align:center; color: oklch(0.92 0.008 94.5 / 0.76)'>Drop file here</h2>
           </div>
-          <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onChange={(e) => triggerDropEvent(e.target, e.target.files)} ref={inputRef} ></input>
+          <input type="file" id="fileElem" {...args.props}  multiple accept="image/*" style="display:none" onChange={(e) => triggerDropEvent(e.target, e.target.files)} ref={inputRef} ></input>
         </div>
       }
     >
@@ -228,6 +210,16 @@ function determineValidator(columnName = '') {
 
   const validators = []
   if (['sku'].includes(columnName)) {
+    validators.push((value) => {
+      if(!value.trim().length) {
+        return (
+          <div class="field-error">
+            You must enter a sku
+          </div>
+        )
+      }
+
+    })
 
     validators.push(async (value) => {
       if (!value) return false
@@ -244,10 +236,21 @@ function determineValidator(columnName = '') {
         <div class="field-error">
           UPC already exists. <a href={`/search?query={value}`}>See matches  ›</a>
         </div>
-      )
+      );
     })
   }
   
 
   return validators
+}
+
+
+
+function determineType (columnName) {
+
+  if (['img', 'image'].includes(columnName.toLowerCase())) {
+    return 'File'
+  }
+
+  return 'string'
 }

@@ -388,3 +388,31 @@ export const determineBrands = createAsync(async function () {
 
   return result
 })
+
+export const determineMarketplaces = createAsync(async function () {
+  const connection = conn()
+  const file = currentFile()
+  const getId = createGetId()
+
+  if (!connection || !file || !getId) return [];
+
+  const data = await connection.query(`SELECT DISTINCT ON (marketplace) * FROM ${ file.name } ORDER BY marketplace;`)
+  
+  let result: { marketplace: string }[] = []
+
+  console.log('Marketplace DATA', data.toString())
+  for (let item of data.toArray()) {
+    let id: any = getId(item)
+    console.log('ID before', id)
+    id = id.formatted.replace(/\s+/g, '')
+    console.log('ID after', id)
+
+    result.push({
+      marketplace: item.marketplace,
+    })
+  }
+
+  console.log(`marketplace`, result)
+
+  return result
+})
