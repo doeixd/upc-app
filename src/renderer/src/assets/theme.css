@@ -15,6 +15,7 @@
   --5: 83.99%;
   --6: 76.99%;
   --6-5: 70.99%;
+  --6-7: 65.99%;
   --7: 55.99%;
   --8: 40.99%;
   --9: 32.99%;
@@ -23,9 +24,21 @@
   --11-5: 10.99%;
   --12: 2%;
 
-  --gold: oklch(0.89 0.21 94 / 1);
+  --h-green: 142.49533888780996;
+  --h-red: 29.2338851923426;
+  --h-gold: 94;
+
+  --green: oklch(64.09% 0.1636 var(--h-green) / var(--a));
+  --red: oklch(62.8% 0.25768330773615683 var(--h-red) / var(--a));
+  --gold: oklch(0.89 0.21 var(--h-gold) / var(--a));
+
+
   --magenta: oklch(63.2% 0.2089 0);
 
+  --dark-red: oklch(54.2% 0.20 var(--h-red) / var(--a));
+  --error-color: var(--dark-red);
+
+  --background-color: #fdfdfb;
   --base-color: oklch(var(--6) var(--c) var(--h) / var(--a));
 
   --white: oklch(99.999% var(--c) var(--h) / var(--a));

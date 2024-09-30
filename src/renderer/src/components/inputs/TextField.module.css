@@ -1,0 +1,36 @@
+
+.inputContainer {
+  /* margin-bottom: 23px; */
+}
+
+.input {
+  background-color: var(--white);
+  display: block;
+  border: 0.8px solid var(--grey-5);
+  border-radius: 6px;
+  padding: 8px;
+  padding-left: 10px;
+  font-size: 1.1em;
+  min-width: 31ch;
+  height: 2.48rem;
+}
+
+.label {
+  /* text-transform: capitalize;
+  transform: translate(0.8px);
+  font-size: 0.995em;
+  padding-bottom: 2.7px;
+  letter-spacing: 0.25px;
+  color: var(--grey-8) */
+}
+
+.error, .error :global(a) {
+  padding-left: 2px;
+  padding-top: 1px;
+  color: oklch(45.3% 0.1702 20.09);
+
+}
+
+.error :global(a:hover) {
+  filter:brightness(1.1)
+}

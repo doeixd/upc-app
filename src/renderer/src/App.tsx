@@ -3,12 +3,14 @@ import Versions from './components/Versions'
 import logo from './assets/logo.svg'
 import { createAsync, useLocation, useNavigate, type RouteDefinition } from "@solidjs/router";
 import { TextField } from "@kobalte/core/text-field";
-import { createMemo, createSignal, onMount, Show, Suspense } from "solid-js";
-import { clientOnly } from "@solidjs/start";
+import { createEffect, createMemo, createSignal, onMount, Show, Suspense } from "solid-js";
 // import upcs from "../api/upc_data.json"
 import { upperFirst } from 'scule'
 import { electron } from './utils/api';
 import TablerArrowBackUp from '~icons/tabler/arrow-back-up'
+import { LoaderLine } from './components/LoaderLine';
+import { useIsRouting } from "@solidjs/router";
+import { useDelayedRoutingIndicator } from './utils/useDelayedRouting';
 
 function handleGo () {
   console.log('clicked')
@@ -17,6 +19,11 @@ function handleGo () {
 const App: ParentComponent = (props) => {
   const navigate = useNavigate()
   const location = useLocation();
+  const isRouting = useDelayedRoutingIndicator(120);
+
+  createEffect(() => {
+    console.log('isRouting', isRouting())
+  })
 
   const pathname = createMemo(() =>(location.pathname));
   console.log('PATHNAME: ', pathname)
@@ -33,7 +40,8 @@ const App: ParentComponent = (props) => {
     </div>
     </div>
     <div class="side-padding px-[32px]">
-    <div class="container h-full relative">
+    <div class="container h-full relative overflow-clip">
+        <LoaderLine show={isRouting()} />
       <Show when={pathname() !== '/' }>
         <button class="back-button" onClick={() => navigate(-1)} title="Back">
           <div class="back-button-backdrop"></div>
@@ -213,3 +221,4 @@ function Table () {
       </table>
     )
 }
+

@@ -1,25 +1,8 @@
-import { Maybe, MaybePromise } from '@modular-forms/solid';
-import { JSXElement } from 'solid-js';
-
-declare module '@modular-forms/solid' {
-  export type ValidateField<TFieldValue> = (value: Maybe<TFieldValue>) => Maybe<MaybePromise<JSXElement>>
-}
-
-
 declare module '*.module.css' {
   const classes: { [key: string]: string };
   export default classes;
 }
 
-declare module '**/*.module.css' {
-  const classes: { [key: string]: string };
-  export default classes;
-}
-
-declare module '*.module.css' {
-  const classes: { [key: string]: string };
-  export default classes;
-}
 
 declare module '*.module.scss' {
   const classes: { [key: string]: string };

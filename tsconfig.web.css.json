@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.web.json",
+  "compilerOptions": {
+    "composite": false
+  },
+  "include": [
+    "**/*.css", 
+    "**/*.module.css",
+    "./src/renderer/src/**/*.module.css",
+    "./src\\renderer\\src\\**\\*.module.css",
+    "@renderer/**/*.module.css",
+    "./src/**/*.module.css",
+    "./**/*.ts",
+    "**/*.tsx",
+    "./typings.d.ts",
+    "./**/*.module.css",
+    "./src/**/*.module.css",
+    "**/*.module.css",
+    "c:\\Users\\Pglenn\\Desktop\\upc-app2\\src\\renderer\\src\\**\\*"
+  ]
+}

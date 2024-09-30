@@ -1,9 +1,8 @@
 import { conn, currentFile, currentFileDescription, db, determineBrands, determineMarketplaces, setCurrentFile, setDb, tanstackTableColumnDefsForCurrentTable, UploadFile } from "@renderer/utils/global"
 import { createForm, setValue } from "@modular-forms/solid"
-import { createEffect, createSignal, For, Show } from "solid-js"
+import { createEffect, createSignal, For, Match, Show, Switch } from "solid-js"
 import HugeiconsSorting05 from '~icons/hugeicons/sorting-05'
 import './addPage.css'
-import style from '../assets/combobox.module.css'
 import { debounce } from "@solid-primitives/scheduled";
 import createDropzone from "solid-dzone";
 import { triggerDropEvent } from "@renderer/utils/triggerDropEvent";
@@ -16,9 +15,20 @@ import HugeiconsAddSquare from '~icons/hugeicons/add-square'
 import { useNavigate } from "@solidjs/router";
 import { unwrap } from "solid-js/store";
 import { titleCase } from "scule";
-import { Combobox } from "@renderer/components/Combobox"
+import { Combobox } from "@renderer/components/inputs/Combobox"
+import { destructure } from "@solid-primitives/destructure"
+import { AddForm } from "./AddForm"
 
-console.log({style})
+/* --- 
+<route type="yaml">
+#yaml 
+  name: name-override
+  meta:
+    requiresAuth: true
+  path: 'poopy'
+#!yaml 
+</route>
+*/
 
 export default function AddPage() {
   const navigate = useNavigate()
@@ -32,6 +42,8 @@ export default function AddPage() {
     </div>
   )
 }
+
+
 
 function determineInput(columnName, field, props, navigate, form) {
 
@@ -102,38 +114,14 @@ function Form (formProps) {
 
   let brands = determineBrands()
 
-  function handleSubmit(event) {
-    console.log('SUBMITTED', event)
-  }
-
   return (
     <div class="form-holder">
-      <Form onSubmit={handleSubmit}>
-        <For each={columnNames}>
-          {(columnName) => {
-            return (
-              <Field name={columnName} validate={determineValidator(columnName)} validateOn='blur' type={determineType(columnName)}>
-                {(field, props) => (
-                <div class="field">
-                  { determineInput(columnName, field, props, formProps?.navigate, form) }
-                  {field.error && <div>{field.error}</div>}
-                </div>)}
-              </Field>
-            )
-          }}
-        </For>
-        <button class="add-button2" type="submit">
-          <div class="add-button__content">
-            Add item
-            <HugeiconsAddSquare />
-          </div>
-          <div class="add-button__rainbow"></div>
-          <div class="add-button__background"></div>
-        </button>
-      </Form>
+      <AddForm />
     </div>
   ) 
 }
+
+
 
 
 

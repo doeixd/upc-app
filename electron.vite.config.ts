@@ -24,11 +24,18 @@ export default defineConfig({
   renderer: {
     resolve: {
       alias: {
-        '@renderer': resolve('src/renderer/src')
+        '@renderer': resolve('src/renderer/src'),
+        '@components': resolve('src/renderer/src/components'),
       }
     },
     build: {
       target: 'esnext'
+    },    
+    css: {
+      modules: {
+        localsConvention: 'camelCase',
+        exportGlobals: true,
+      },
     },
     plugins: [
       solid(),
@@ -36,9 +43,15 @@ export default defineConfig({
       Icons({compiler: 'solid'}),
       Pages({
         onRoutesGenerated: (routes) =>{
+
+          let last;
           new Traverse(routes).nodes().forEach(node => {
             if (node.path) node.path = node.path.replace(/\.page/i, '')
             if (node.path && node.path == 'index') node.path = '/'
+            let cur = (node?.path || '')?.match(/\w+(?=$|\.page\.[tj]sx?)/)?.at(0)?.trim()
+            // console.log({cur, last, path: node?.path, _new: ('/' + (node?.path || '').replace(/\w+(?=$|\.page\.[tj]sx?)/, '/')).trim().replace(/\/\/+/g, '/') })
+            if (cur == last && node?.path) { node.path = ('/' + node.path.replace(/\w+(?=$|\.page\.[tj]sx?)/, '/')).trim().replace(/\/\/+/g, '/')}
+            if (cur) last = cur
             // if (node.component && typeof node.component == 'string') {
             //   console.log('before: ', node.component)
             //   const without = node.component.replace(/\..+$/, '')
@@ -46,9 +59,13 @@ export default defineConfig({
             //   node.component = lazy(() => import(without))
             // }
           })
-          console.log({routes})
+          console.log({routes, add: routes?.[2]?.children?.[0]})
           return routes
         },
+        // onClientGenerated(str) {
+
+
+        // },
         dirs: [{
           dir:'src/routes',
           filePattern: `**\/*.page.tsx`,

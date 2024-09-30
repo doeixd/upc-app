@@ -1,0 +1,27 @@
+
+.label {
+  display: block;
+  text-transform: capitalize;
+  transform: translate(1.1px);
+  font-size: 0.998em;
+  padding-bottom: 4px;
+  letter-spacing: 0.28px;
+  color: var(--grey-8)
+}
+
+.inputShadow {
+  filter: drop-shadow(3px 3px 3px oklch(0.95 0.003 93.4 / 0.5));
+  /* box-shadow: 1px 1px 4.5px 3px inset oklch(0.98 0.003 93.4 / 0.6), 1.2px 1.2px 30px -30px oklch(0.88 0.003 93.4 / 0.6); */
+  box-shadow: 1px 1px 3.5px 1px inset oklch(0.98 0.003 93.4 / 0.6), 1.2px 1.2px 2px -30px oklch(0.95 0.003 93.4 / 0.4)
+}
+
+
+.error {
+  color: var(--error-color);
+  transform: translateX(1px)
+}
+
+.error :global(a) {
+  color: var(--error-color)
+
+}

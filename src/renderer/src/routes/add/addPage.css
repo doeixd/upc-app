@@ -58,6 +58,10 @@
     box-sizing: content-box;
     transition: all 100ms linear;
 
+    svg, g, path {
+      transition: none !important;
+    }
+
     &:hover {
       --a: 0.2;
       background-color: oklch(from var(--grey-3) l c h / 0.6);

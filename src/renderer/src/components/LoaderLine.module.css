@@ -1,0 +1,72 @@
+.holder {
+  --holder-width: 100%;
+  --holder-height: 5px;
+  --gradient-colors: red, yellow, green, cyan, blue, magenta, red;
+  --shuttle-max-width: 200px;
+  --shuttle-color: var(--background-color);
+  --animation-duration: 1.5s;
+  --animation-timing-function: ease-in-out;
+  --animation-iteration-count: infinite;
+  --animation-direction: alternate-reverse;
+
+
+  width: var(--holder-width);
+  height: var(--holder-height);
+  position: relative;
+  display: block;
+  background-image: linear-gradient(to right, var(--gradient-colors));
+  --shuttle-max-width: 200px;
+  overflow: hidden;
+}
+@keyframes left {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: calc(calc(50%) - calc(var(--shuttle-max-width)) / 2);
+  }
+
+  100% {
+    width: 100%;
+  }
+
+}
+
+.left {
+  width: 0;
+  height: var(--holder-height);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--shuttle-color);
+  animation: left var(--animation-duration) var(--animation-timing-function) var(--animation-iteration-count) var(--animation-direction);
+}
+
+.right {
+  width: 100%;
+  height: 5px;
+  display: block;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: var(--shuttle-color);
+  animation: right var(--animation-duration) var(--animation-timing-function) var(--animation-iteration-count) var(--animation-direction);
+}
+
+@keyframes right {
+  0% {
+    left: 0;
+    width: 100%;
+  }
+
+  50% {
+    left: calc(50% + calc(var(--shuttle-max-width) / 2));
+  }
+  
+  100% {
+    left: 100%;
+  }
+
+}
