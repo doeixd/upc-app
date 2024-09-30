@@ -44,7 +44,7 @@ export function createFormInputs<F extends ReturnType<typeof createForm<any, any
   //  as {Field: ParentComponent, Form: ParentComponent, FieldArray: ParentComponent}
 
   // type FieldProps = Parameters<typeof Field>[0] & { type?: Maybe<string> }
-  type OurFieldProps = Omit<FieldProps<Record<string, FieldValue>, undefined, string>, 'of' | 'children' | 'type'>
+  type OurFieldProps = Omit<FieldProps<Record<string, any>, undefined, string>, 'of' | 'children' | 'type'>
 
   return {
     SKU: (p: OurFieldProps) => {
