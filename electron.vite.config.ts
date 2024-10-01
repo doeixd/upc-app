@@ -59,7 +59,7 @@ export default defineConfig({
             //   node.component = lazy(() => import(without))
             // }
           })
-          console.log({routes, add: routes?.[2]?.children?.[0]})
+          console.log({routes, add: routes?.[2]?.children})
           return routes
         },
         // onClientGenerated(str) {

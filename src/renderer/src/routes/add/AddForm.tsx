@@ -22,7 +22,9 @@ import { createFormInputs } from "@renderer/components/inputs/createInputs"
 
 
 
-function handleSubmit(values, event) {
+function handleSubmit(navigate, [values, event]) {
+  navigate(`/add/variants`, { state: values })
+  
   console.log('SUBMITTED', 'values ', values, 'event ', event)
 
 }
@@ -30,15 +32,18 @@ function handleSubmit(values, event) {
 
 export function AddForm(formProps) {
   
+  const navigate = useNavigate()
+
   const defs = tanstackTableColumnDefsForCurrentTable().slice(1)
   //@ts-ignore
   let columnNames = defs.map(v => v?.accessorKey).filter(key => key !== 'date')
 
   type StoreType = {
     brand: { brand: string, companyCode: string }
-  } & Record<string, FieldValue>
+  } & Omit<Record<string, any >, 'brand'>
 
-  const formInfo = createForm<StoreType>()
+
+  const formInfo = createForm<StoreType, any>()
   const [form, { Form, Field, FieldArray }] = formInfo
 
   const Inputs = createFormInputs(formInfo)
@@ -53,7 +58,7 @@ export function AddForm(formProps) {
 
   return (
     <div class="form-holder">
-      <Form onSubmit={handleSubmit} shouldActive={true} shouldFocus={true}>
+      <Form onSubmit={(...values) => handleSubmit(navigate, values)} shouldActive={true} shouldFocus={true}>
         <For each={columnNames}>
           {(columnName) => {
             return (<>

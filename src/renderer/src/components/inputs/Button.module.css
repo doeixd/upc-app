@@ -1,0 +1,10 @@
+
+
+
+export function Button(props) {
+  return (
+    <button class="button">
+      {props.children}
+    </button>
+  )
+}

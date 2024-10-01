@@ -134,6 +134,10 @@
 		padding: 8px;
 	}
 
+	.combobox :global(.combobox__listbox) :global([aria-selected="true"]) {
+		background-color: var(--grey-1);
+	}
+	
 	.combobox :global(.combobox__listbox:focus) {
 		outline: none;
 	}

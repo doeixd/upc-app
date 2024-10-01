@@ -136,6 +136,7 @@ function UploadArea(args) {
   
   const [previewSrc, setPreviewSrc] = createSignal()
 
+
   createEffect(async () => {
     console.log('DND FILES', files())
     if (files().length) {

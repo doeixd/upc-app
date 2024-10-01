@@ -113,11 +113,11 @@ export function Combobox<Option = any, OptGroup = never, As extends ValidCompone
         inert={true}
         onInput={(e) => {
           console.log('onInput Event HiddenSelectEl', e)
-          props.onInput(e)
+          props?.onInput?.(e)
         }}
         onChange={(e) => {
           console.log('onChange Event HiddenSelectEl', e)
-          props.onChange(e)
+          props.onChange?.(e)
         }}
       />
 
@@ -127,11 +127,11 @@ export function Combobox<Option = any, OptGroup = never, As extends ValidCompone
           data-combo-input="true"
           onInput={(e) => {
             console.log('onInput Event InputEl', e)
-            props.onInput(e)
+            props?.onInput?.(e)
           }}
           onChange={(e) => {
             console.log('onChange Event InputEl', e)
-            props.onChange(e)
+            props.onChange?.(e)
           }}
           placeholder={local?.placeholder || ''}
           ref={(el) => {

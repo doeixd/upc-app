@@ -30,7 +30,7 @@
 
   --green: oklch(64.09% 0.1636 var(--h-green) / var(--a));
   --red: oklch(62.8% 0.25768330773615683 var(--h-red) / var(--a));
-  --gold: oklch(0.89 0.21 var(--h-gold) / var(--a));
+  --gold: oklch(0.87 0.21 var(--h-gold) / var(--a));
 
 
   --magenta: oklch(63.2% 0.2089 0);
