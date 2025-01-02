@@ -1,10 +1,7 @@
-# upc-app
+# UPC App
 
-An Electron application with Solid and TypeScript
+A simple Electron app to help you manage your UPC codes.
 
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 ## Project Setup
 

@@ -1,0 +1,10 @@
+@layer reset, base, theme, components;
+
+@import url("./reset.css") layer(reset);
+@import url("./base.css")  layer(base );
+@import url("./theme.css") layer(theme);
+/* @import url("./components.css") layer(components); */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

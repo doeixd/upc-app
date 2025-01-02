@@ -1,28 +1,232 @@
 
+/* * {
+    --l-delta-0: 0%;
+    --l-delta-1: 0.22%;
+    --l-delta-2: 1.25%;
+    --l-delta-3: 2.25%;
+    --l-delta-4: 3.4%;
+    --l-delta-5: 4.95%;
+    --l-delta-6: 9.2%;
+    --l-delta-7: 12.9%;
+    --l-delta-8: 17%;
+    --l-delta-9: 22.5%;
+    --l-delta-10: 29.1%;
+    --l-delta-11: 36.1%;
+    --l-delta-12: 43.5%;
+    --l-delta-13: 51.6%;
+    --l-delta-14: 58.9%;
+    --l-delta-15: 65.8%;
+    --l-delta-16: 72.01%;
+    --l-delta-17: 77%;
+    --l-delta-18: 82.7%;
+    --l-delta-19: 92.01%;
+    --l-delta-20: 100%;
+    --l-delta-0-: calc(-1 * var(--l-delta-0));
+    --l-delta-1-: calc(-1 * var(--l-delta-1));
+    --l-delta-2-: calc(-1 * var(--l-delta-2));
+    --l-delta-3-: calc(-1 * var(--l-delta-3));
+    --l-delta-4-: calc(-1 * var(--l-delta-4));
+    --l-delta-5-: calc(-1 * var(--l-delta-5));
+    --l-delta-6-: calc(-1 * var(--l-delta-6));
+    --l-delta-7-: calc(-1 * var(--l-delta-7));
+    --l-delta-8-: calc(-1 * var(--l-delta-8));
+    --l-delta-9-: calc(-1 * var(--l-delta-9));
+    --l-delta-10-: calc(-1 * var(--l-delta-10));
+    --l-delta-11-: calc(-1 * var(--l-delta-11));
+    --l-delta-12-: calc(-1 * var(--l-delta-12));
+    --l-delta-13-: calc(-1 * var(--l-delta-13));
+    --l-delta-14-: calc(-1 * var(--l-delta-14));
+    --l-delta-15-: calc(-1 * var(--l-delta-15));
+    --l-delta-16-: calc(-1 * var(--l-delta-16));
+    --l-delta-17-: calc(-1 * var(--l-delta-17));
+    --l-delta-18-: calc(-1 * var(--l-delta-18));
+    --l-delta-19-: calc(-1 * var(--l-delta-19));
+    --l-delta-20-: calc(-1 * var(--l-delta-20));
+    --l-0: calc(100% - var(--l-delta, var(--l-delta-0)));
+    --l-1: calc(100% - var(--l-delta, var(--l-delta-1)));
+    --l-2: calc(100% - var(--l-delta, var(--l-delta-2)));
+    --l-3: calc(100% - var(--l-delta, var(--l-delta-3)));
+    --l-4: calc(100% - var(--l-delta, var(--l-delta-4)));
+    --l-5: calc(100% - var(--l-delta, var(--l-delta-5)));
+    --l-6: calc(100% - var(--l-delta, var(--l-delta-6)));
+    --l-7: calc(100% - var(--l-delta, var(--l-delta-7)));
+    --l-8: calc(100% - var(--l-delta, var(--l-delta-8)));
+    --l-9: calc(100% - var(--l-delta, var(--l-delta-9)));
+    --l-10: calc(100% - var(--l-delta, var(--l-delta-10)));
+    --l-11: calc(100% - var(--l-delta, var(--l-delta-11)));
+    --l-12: calc(100% - var(--l-delta, var(--l-delta-12)));
+    --l-13: calc(100% - var(--l-delta, var(--l-delta-13)));
+    --l-14: calc(100% - var(--l-delta, var(--l-delta-14)));
+    --l-15: calc(100% - var(--l-delta, var(--l-delta-15)));
+    --l-16: calc(100% - var(--l-delta, var(--l-delta-16)));
+    --l-17: calc(100% - var(--l-delta, var(--l-delta-17)));
+    --l-18: calc(100% - var(--l-delta, var(--l-delta-18)));
+    --l-19: calc(100% - var(--l-delta, var(--l-delta-19)));
+    --l-20: calc(100% - var(--l-delta, var(--l-delta-20)));
+    --l-0-: calc(100% - var(--l-delta, var(--l-delta-0-)));
+    --l-1-: calc(100% - var(--l-delta, var(--l-delta-1-)));
+    --l-2-: calc(100% - var(--l-delta, var(--l-delta-2-)));
+    --l-3-: calc(100% - var(--l-delta, var(--l-delta-3-)));
+    --l-4-: calc(100% - var(--l-delta, var(--l-delta-4-)));
+    --l-5-: calc(100% - var(--l-delta, var(--l-delta-5-)));
+    --l-6-: calc(100% - var(--l-delta, var(--l-delta-6-)));
+    --l-7-: calc(100% - var(--l-delta, var(--l-delta-7-)));
+    --l-8-: calc(100% - var(--l-delta, var(--l-delta-8-)));
+    --l-9-: calc(100% - var(--l-delta, var(--l-delta-9-)));
+    --l-10-: calc(100% - var(--l-delta, var(--l-delta-10-)));
+    --l-11-: calc(100% - var(--l-delta, var(--l-delta-11-)));
+    --l-12-: calc(100% - var(--l-delta, var(--l-delta-12-)));
+    --l-13-: calc(100% - var(--l-delta, var(--l-delta-13-)));
+    --l-14-: calc(100% - var(--l-delta, var(--l-delta-14-)));
+    --l-15-: calc(100% - var(--l-delta, var(--l-delta-15-)));
+    --l-16-: calc(100% - var(--l-delta, var(--l-delta-16-)));
+    --l-17-: calc(100% - var(--l-delta, var(--l-delta-17-)));
+    --l-18-: calc(100% - var(--l-delta, var(--l-delta-18-)));
+    --l-19-: calc(100% - var(--l-delta, var(--l-delta-19-)));
+    --l-20-: calc(100% - var(--l-delta, var(--l-delta-20-)));
+    --fg-l-0: calc(100% - var(--l-delta, var(--l-delta-0)));
+    --fg-l-1: calc(100% - var(--l-delta, var(--l-delta-1)));
+    --fg-l-2: calc(100% - var(--l-delta, var(--l-delta-2)));
+    --fg-l-3: calc(100% - var(--l-delta, var(--l-delta-3)));
+    --fg-l-4: calc(100% - var(--l-delta, var(--l-delta-4)));
+    --fg-l-5: calc(100% - var(--l-delta, var(--l-delta-5)));
+    --fg-l-6: calc(100% - var(--l-delta, var(--l-delta-6)));
+    --fg-l-7: calc(100% - var(--l-delta, var(--l-delta-7)));
+    --fg-l-8: calc(100% - var(--l-delta, var(--l-delta-8)));
+    --fg-l-9: calc(100% - var(--l-delta, var(--l-delta-9)));
+    --fg-l-10: calc(100% - var(--l-delta, var(--l-delta-10)));
+    --fg-l-11: calc(100% - var(--l-delta, var(--l-delta-11)));
+    --fg-l-12: calc(100% - var(--l-delta, var(--l-delta-12)));
+    --fg-l-13: calc(100% - var(--l-delta, var(--l-delta-13)));
+    --fg-l-14: calc(100% - var(--l-delta, var(--l-delta-14)));
+    --fg-l-15: calc(100% - var(--l-delta, var(--l-delta-15)));
+    --fg-l-16: calc(100% - var(--l-delta, var(--l-delta-16)));
+    --fg-l-17: calc(100% - var(--l-delta, var(--l-delta-17)));
+    --fg-l-18: calc(100% - var(--l-delta, var(--l-delta-18)));
+    --fg-l-19: calc(100% - var(--l-delta, var(--l-delta-19)));
+    --fg-l-20: calc(100% - var(--l-delta, var(--l-delta-20)));
+    --fg-l-0-: calc(100% - var(--l-delta, var(--l-delta-0-)));
+    --fg-l-1-: calc(100% - var(--l-delta, var(--l-delta-1-)));
+    --fg-l-2-: calc(100% - var(--l-delta, var(--l-delta-2-)));
+    --fg-l-3-: calc(100% - var(--l-delta, var(--l-delta-3-)));
+    --fg-l-4-: calc(100% - var(--l-delta, var(--l-delta-4-)));
+    --fg-l-5-: calc(100% - var(--l-delta, var(--l-delta-5-)));
+    --fg-l-6-: calc(100% - var(--l-delta, var(--l-delta-6-)));
+    --fg-l-7-: calc(100% - var(--l-delta, var(--l-delta-7-)));
+    --fg-l-8-: calc(100% - var(--l-delta, var(--l-delta-8-)));
+    --fg-l-9-: calc(100% - var(--l-delta, var(--l-delta-9-)));
+    --fg-l-10-: calc(100% - var(--l-delta, var(--l-delta-10-)));
+    --fg-l-11-: calc(100% - var(--l-delta, var(--l-delta-11-)));
+    --fg-l-12-: calc(100% - var(--l-delta, var(--l-delta-12-)));
+    --fg-l-13-: calc(100% - var(--l-delta, var(--l-delta-13-)));
+    --fg-l-14-: calc(100% - var(--l-delta, var(--l-delta-14-)));
+    --fg-l-15-: calc(100% - var(--l-delta, var(--l-delta-15-)));
+    --fg-l-16-: calc(100% - var(--l-delta, var(--l-delta-16-)));
+    --fg-l-17-: calc(100% - var(--l-delta, var(--l-delta-17-)));
+    --fg-l-18-: calc(100% - var(--l-delta, var(--l-delta-18-)));
+    --fg-l-19-: calc(100% - var(--l-delta, var(--l-delta-19-)));
+    --fg-l-20-: calc(100% - var(--l-delta, var(--l-delta-20-)));
+    --bg-l-0: calc(100% - var(--l-delta, var(--l-delta-0)));
+    --bg-l-1: calc(100% - var(--l-delta, var(--l-delta-1)));
+    --bg-l-2: calc(100% - var(--l-delta, var(--l-delta-2)));
+    --bg-l-3: calc(100% - var(--l-delta, var(--l-delta-3)));
+    --bg-l-4: calc(100% - var(--l-delta, var(--l-delta-4)));
+    --bg-l-5: calc(100% - var(--l-delta, var(--l-delta-5)));
+    --bg-l-6: calc(100% - var(--l-delta, var(--l-delta-6)));
+    --bg-l-7: calc(100% - var(--l-delta, var(--l-delta-7)));
+    --bg-l-8: calc(100% - var(--l-delta, var(--l-delta-8)));
+    --bg-l-9: calc(100% - var(--l-delta, var(--l-delta-9)));
+    --bg-l-10: calc(100% - var(--l-delta, var(--l-delta-10)));
+    --bg-l-11: calc(100% - var(--l-delta, var(--l-delta-11)));
+    --bg-l-12: calc(100% - var(--l-delta, var(--l-delta-12)));
+    --bg-l-13: calc(100% - var(--l-delta, var(--l-delta-13)));
+    --bg-l-14: calc(100% - var(--l-delta, var(--l-delta-14)));
+    --bg-l-15: calc(100% - var(--l-delta, var(--l-delta-15)));
+    --bg-l-16: calc(100% - var(--l-delta, var(--l-delta-16)));
+    --bg-l-17: calc(100% - var(--l-delta, var(--l-delta-17)));
+    --bg-l-18: calc(100% - var(--l-delta, var(--l-delta-18)));
+    --bg-l-19: calc(100% - var(--l-delta, var(--l-delta-19)));
+    --bg-l-20: calc(100% - var(--l-delta, var(--l-delta-20)));
+    --bg-l-0-: calc(100% - var(--l-delta, var(--l-delta-0-)));
+    --bg-l-1-: calc(100% - var(--l-delta, var(--l-delta-1-)));
+    --bg-l-2-: calc(100% - var(--l-delta, var(--l-delta-2-)));
+    --bg-l-3-: calc(100% - var(--l-delta, var(--l-delta-3-)));
+    --bg-l-4-: calc(100% - var(--l-delta, var(--l-delta-4-)));
+    --bg-l-5-: calc(100% - var(--l-delta, var(--l-delta-5-)));
+    --bg-l-6-: calc(100% - var(--l-delta, var(--l-delta-6-)));
+    --bg-l-7-: calc(100% - var(--l-delta, var(--l-delta-7-)));
+    --bg-l-8-: calc(100% - var(--l-delta, var(--l-delta-8-)));
+    --bg-l-9-: calc(100% - var(--l-delta, var(--l-delta-9-)));
+    --bg-l-10-: calc(100% - var(--l-delta, var(--l-delta-10-)));
+    --bg-l-11-: calc(100% - var(--l-delta, var(--l-delta-11-)));
+    --bg-l-12-: calc(100% - var(--l-delta, var(--l-delta-12-)));
+    --bg-l-13-: calc(100% - var(--l-delta, var(--l-delta-13-)));
+    --bg-l-14-: calc(100% - var(--l-delta, var(--l-delta-14-)));
+    --bg-l-15-: calc(100% - var(--l-delta, var(--l-delta-15-)));
+    --bg-l-16-: calc(100% - var(--l-delta, var(--l-delta-16-)));
+    --bg-l-17-: calc(100% - var(--l-delta, var(--l-delta-17-)));
+    --bg-l-18-: calc(100% - var(--l-delta, var(--l-delta-18-)));
+    --bg-l-19-: calc(100% - var(--l-delta, var(--l-delta-19-)));
+    --bg-l-20-: calc(100% - var(--l-delta, var(--l-delta-20-)));
+} */
+
 :root {
   --c: 0.003; 
   --h: 106.42; 
   --a: 1;
 
+  
+  --l-delta-1-: -1%;
+  --l-delta-2-: -2%;
+  --l-delta-3-: -3%;
+  --l-delta-4-: -4%;
+  --l-delta-5-: -5%;
+  --l-delta-6-: -6%;
+  --l-delta-7-: -7%;
+  --l-delta-8-: -8%;
+  --l-delta-9-: -9%;
+  --l-delta-10-: -10%;
+  --l-delta-11-: -11%;
+  --l-delta-12-: -12%;
+  --l-delta-13-: -13%;
 
-  --0: 99.8%;
-  --1: 98.99%;
-  --1-5: 97.99%;
-  --2: 96.4%;
-  --2-5: 94.99%;
-  --3: 92.99%;
-  --4: 88.99%;
-  --5: 83.99%;
-  --6: 76.99%;
-  --6-5: 70.99%;
-  --6-7: 65.99%;
-  --7: 55.99%;
-  --8: 40.99%;
-  --9: 32.99%;
-  --10: 25.99%;
-  --11: 15.99%;
-  --11-5: 10.99%;
-  --12: 2%;
+  --l-delta: 0%;
+
+  --l-delta-1: 1%;
+  --l-delta-2: 2.2%;
+  --l-delta-3: 3.3%;
+  --l-delta-4: 4.4%;
+  --l-delta-5: 5.5%;
+  --l-delta-6: 6.6%;
+  --l-delta-7: 7.7%;
+  --l-delta-8: 8.8%;
+  --l-delta-9: 9.9%;
+  --l-delta-10: 10.1%;
+  --l-delta-11: 11.1%;
+  --l-delta-12: 12.2%;
+  --l-delta-13: 13.2%;
+
+
+  --0: var(--l, calc(99.8% + var(--l-delta, 0%)));
+  --1: var(--l, calc(98.99% + var(--l-delta, 0%)));
+  --1-5: var(--l, calc(97.99% + var(--l-delta, 0%)));
+  --2: var(--l, calc(96.4% + var(--l-delta, 0%)));
+  --2-5: var(--l, calc(94.99% + var(--l-delta, 0%)));
+  --3: var(--l, calc(92.99% + var(--l-delta, 0%)));
+  --4: var(--l, calc(88.99% + var(--l-delta, 0%)));
+  --5: var(--l, calc(83.99% + var(--l-delta, 0%)));
+  --6: var(--l, calc(76.99% + var(--l-delta, 0%)));
+  --6-5: var(--l, calc(70.99% + var(--l-delta, 0%)));
+  --6-7: var(--l, calc(65.99% + var(--l-delta, 0%)));
+  --7: var(--l, calc(55.99% + var(--l-delta, 0%)));
+  --8: var(--l, calc(40.99% + var(--l-delta, 0%)));
+  --9: var(--l, calc(32.99% + var(--l-delta, 0%)));
+  --10: var(--l, calc(25.99% + var(--l-delta, 0%)));
+  --11: var(--l, calc(15.99% + var(--l-delta, 0%)));
+  --11-5: var(--l, calc(10.99% + var(--l-delta, 0%)));
+  --12: var(--l, calc(2% + var(--l-delta, 0%)));
+  --13: var(--l, calc(1% + var(--l-delta, 0%)));
+
 
   --h-green: 142.49533888780996;
   --h-red: 29.2338851923426;
@@ -30,7 +234,7 @@
 
   --green: oklch(64.09% 0.1636 var(--h-green) / var(--a));
   --red: oklch(62.8% 0.25768330773615683 var(--h-red) / var(--a));
-  --gold: oklch(0.87 0.21 var(--h-gold) / var(--a));
+  --gold: oklch(0.87 var(--l, 0.21) var(--h-gold) / var(--a));
 
 
   --magenta: oklch(63.2% 0.2089 0);
@@ -129,3 +333,57 @@
   syntax: '<percentage>';
   inherits: true;
 }
+
+
+/* button {
+  padding-top: var(--padding-top, var(--padding-block, var(--padding, 10px)));
+  padding-bottom: var(--padding-bottom, var(--padding-block, var(--padding, 10px)));
+  padding-left: var(--padding-left, var(--padding-inline, var(--padding, 10px)));
+  padding-right: var(--padding-right, var(--padding-inline, var(--padding, 10px)));
+
+  border-width: var(--border-width, 0);
+  border-color: var(--border-color, transparent);
+  border-radius: var(--border-radius, initial);
+
+  color: var(--color);
+
+  background-color: var(--background-color, var(--button-background-color, transparent));
+
+}
+
+button:hover {
+  color: var(--hover-color, var(--color));
+  background-color: var(--hover-background-color, var(--hover-button-background-color), var(--background-color, var(--button-background-color, transparent)));
+} */
+
+
+.tooltip__trigger {
+  border: 0 none;
+  /* display: contents; */
+}
+
+.tooltip__content {
+  background-color: var(--grey-11);
+  color: var(--grey-1);
+  border-radius: 0.75rem;
+  padding: 0.8rem 1.2rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  letter-spacing: 0.6px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  max-width: 25ch;
+  box-sizing: content-box;
+  /* border: 0.1px solid var(--grey-7); */
+  box-shadow: 0 0 2.5px 2.5px inset oklch(from var(--grey-2) 0.9 calc(c * 0.9) h / 0.4);
+  filter: drop-shadow(2px 3px 22px oklch(0.15 0.003 93.4 / 0.35));
+}
+
+.tooltip__arrow {
+  fill: var(--grey-11);
+}
+
+[data-popper-positioner]  {
+  transition: none;
+}
+

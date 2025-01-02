@@ -16,7 +16,7 @@
 *::backdrop { all:unset; }
 :where(modal::dialog) { max-width: 100dvw; max-height:100dvh; }
 :where(:not(:is(html, audio, textarea, body, main, table, button, checkbox, input, td, tr, th, tbody, table, tfoot, video, form, details, select, summary, fieldset, hr, *::before, *::after, frame, iframe, datalist, object))) { border-style: solid; border-width: 0; }
-:where(:is(a:empty, ul:empty, dl:empty, div:empty, section:empty, article:empty, p:empty, h1:empty, h2:empty, h3:empty, h4:empty, h5:empty, h6:empty)) { display: none; }
+:where(:is(a:empty, ul:empty, dl:empty, p:empty, h1:empty, h2:empty, h3:empty, h4:empty, h5:empty, h6:empty)) { display: none; }
 :where(.display-none) { display: none; }
 :where(:target) { scroll-margin-block: 5ex; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition: none; animation-name: none; } }

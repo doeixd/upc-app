@@ -1,7 +1,7 @@
 module.exports = (css, { fileName, logger }) => {
   try {
     // ...process your css here.
-    console.log(fileName, css)
+    // console.log(fileName, css)
     logger.log(fileName, css)
 
     // `string`

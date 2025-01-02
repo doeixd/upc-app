@@ -13,7 +13,7 @@ import { FieldElementProps, FieldValue, setValue } from "@modular-forms/solid";
 import { mergeRefs, Ref } from "@solid-primitives/refs";
 import { combineProps } from "@solid-primitives/props";
 
-console.log(style, JSON.stringify(style, null, 2))
+// console.log(style, JSON.stringify(style, null, 2))
 
 
 type DefaultT<Option = any, OptGroup = never, As extends ValidComponent = "input"> = Parameters<typeof KCombobox<Option, OptGroup, As>>[0] & { value?: string | undefined, showLabel: boolean, errorValue?: JSX.Element, inputProps: FieldElementProps<Record<string, FieldValue>, string> & Omit<JSX.HTMLElementTags['input'], 'name'> & { name: string | undefined } }
@@ -48,24 +48,28 @@ export function Combobox<Option = any, OptGroup = never, As extends ValidCompone
   const [selectedValue, setSelectedValue] = createSignal(local.value);
 
   createEffect(() => {
-    setSelectedValue(local.value);
+    // setSelectedValue(local.value);
   });
 
   const onChange = (value) => {
     if (!value) return;
-    console.log({ local, others, props })
-    console.log('handleChange', value, others.optionValue, value?.[others.optionValue]);
+    // console.log({ local, others, props })
+    // console.log('handleChange', value, others.optionValue, value?.[others.optionValue]);
     let val =
       value
         ? typeof value == 'object'
           ? value?.[others.optionValue] || value?.value
           : value
         : undefined;
-    console.log('handleChange VAL', val);
-    setSelectedValue(val);
+    // console.log('handleChange VAL', val);
+    // setValue(props.form, props.name, val)
+    // setSelectedValue(val);
+
+
     if (local.onChange) {
       local.onChange(val);
     }
+
   }
 
   // const d = setValue(props.form, props.field.name, )
@@ -87,7 +91,7 @@ export function Combobox<Option = any, OptGroup = never, As extends ValidCompone
       sectionComponent={props => (
         <KCombobox.Section class='combobox__section'>{props.section.textValue}</KCombobox.Section>
       )}
-      // {...local}
+      {...local}
       // {...cothers}
 
       {...others}
@@ -103,22 +107,23 @@ export function Combobox<Option = any, OptGroup = never, As extends ValidCompone
     // value={getValue()}
     // onChange={setValue}
     // value={props.inputProps.value}
-
+      // value={props?.field?.value || ''}
     >
-      <Show when={props.showLabel && props?.name}>
-        <KCombobox.Label class={" " + basicStyles.label}>{titleCase(props?.name || local?.label || '')}</KCombobox.Label>
+      <Show when={props.showLabel || (props?.name && props?.label)}>
+        <KCombobox.Label class={" " + basicStyles.label}>{titleCase(local?.label || props?.name || '')}</KCombobox.Label>
       </Show>
       <KCombobox.HiddenSelect
         aria-hidden="false"
         inert={true}
         onInput={(e) => {
-          console.log('onInput Event HiddenSelectEl', e)
+          // console.log('onInput Event HiddenSelectEl', e)
           props?.onInput?.(e)
         }}
         onChange={(e) => {
-          console.log('onChange Event HiddenSelectEl', e)
+          // console.log('onChange Event HiddenSelectEl', e, props?.onChange?.(e))
           props.onChange?.(e)
         }}
+        // value={props?.field?.value || ''}
       />
 
       <KCombobox.Control aria-label={props?.name ?? ''} class={['combobox__control', 'inputShadow'].join(' ')}>
@@ -126,11 +131,11 @@ export function Combobox<Option = any, OptGroup = never, As extends ValidCompone
           class='combobox__input'
           data-combo-input="true"
           onInput={(e) => {
-            console.log('onInput Event InputEl', e)
+            // console.log('onInput Event InputEl', e)
             props?.onInput?.(e)
           }}
           onChange={(e) => {
-            console.log('onChange Event InputEl', e)
+            // console.log('onChange Event InputEl', e)
             props.onChange?.(e)
           }}
           placeholder={local?.placeholder || ''}
@@ -140,6 +145,7 @@ export function Combobox<Option = any, OptGroup = never, As extends ValidCompone
               local.ref(el);
             }
           }}
+          // value={props?.field?.value || ''}
         />
         <KCombobox.Trigger class="combobox__trigger comboboxTrigger" data-combo-trigger="true">
           <KCombobox.Icon class='combobox__icon'>

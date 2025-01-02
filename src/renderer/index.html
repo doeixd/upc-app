@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Electron</title>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' blob:; img-src * data: blob:; media-src * blob:; script-src * 'unsafe-inline' 'unsafe-eval' blob:; style-src * 'unsafe-inline' blob:; font-src * data: blob:;">
+<head>
+  <meta charset="UTF-8" />
+  <title>Electron</title>
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 
-  </head>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src * 'unsafe-inline' 'unsafe-eval' blob:; img-src * data: blob:; media-src * blob:; script-src * 'unsafe-inline' 'unsafe-eval' blob:; style-src * 'unsafe-inline' blob:; font-src * data: blob:;">
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+
+    document.addEventListener('scroll', e => {
+      if (e.target === e.currentTarget) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
+    }, { passive: false })
+    document.addEventListener('touchmove', e => {
+      if (e.target === e.currentTarget) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
+    }, { passive: false })
+  </script>
+</body>
+
 </html>

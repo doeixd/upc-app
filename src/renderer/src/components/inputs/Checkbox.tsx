@@ -11,6 +11,7 @@ type CheckboxProps = {
   label: string;
   value?: string | undefined;
   checked: boolean | undefined;
+  indeterminate?: boolean | undefined;
   error: string;
   required?: boolean | undefined;
   disabled?: boolean | undefined;
@@ -33,12 +34,19 @@ export function Checkbox(props: CheckboxProps) {
 
   return (
     <Kobalte.Root
-      {...rootProps}
+      // {...rootProps}
       class={style.checkbox}
+      // onChange={props.onChange}
+      // onInput={props.onInput}
+      checked={props.checked}
       validationState={typeof props?.error !== undefined ? props.error ? 'invalid' : 'valid' : undefined}
+      {...props}
     >
-      <Kobalte.Input {...inputProps} class={style.checkbox__input} ref={mergeRefs(inputProps.ref, (item) => setInputRef(item) )}/>
-      <Kobalte.Control class={style.checkbox__control} onClick={e => inputRef()!.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))}>
+      {/* <Kobalte.Input {...inputProps} class={style.checkbox__input} ref={mergeRefs(inputProps.ref, (item) => setInputRef(item) )}/> */}
+      <Kobalte.Input />
+      {/* <Kobalte.Control class={style.checkbox__control} onClick={e => inputRef()!.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))}> */}
+      {/* <Kobalte.Control class={style.checkbox__control} onClick={e => inputRef()!.dispatchEvent(e)}> */}
+      <Kobalte.Control class={style.checkbox__control}>
         <Kobalte.Indicator>
         <HeroiconsOutlineCheck />
         </Kobalte.Indicator>

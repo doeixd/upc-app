@@ -13,7 +13,7 @@ import { useIsRouting } from "@solidjs/router";
 import { useDelayedRoutingIndicator } from './utils/useDelayedRouting';
 
 function handleGo () {
-  console.log('clicked')
+  // console.log('clicked')
 }
 
 const App: ParentComponent = (props) => {
@@ -22,11 +22,12 @@ const App: ParentComponent = (props) => {
   const isRouting = useDelayedRoutingIndicator(120);
 
   createEffect(() => {
-    console.log('isRouting', isRouting())
+    // console.log('isRouting', isRouting())
+    // console.log('location', location)
   })
 
   const pathname = createMemo(() =>(location.pathname));
-  console.log('PATHNAME: ', pathname)
+  // console.log('PATHNAME: ', pathname)
   return (<>
   <div class="header">
     <div class="icon">
@@ -43,7 +44,15 @@ const App: ParentComponent = (props) => {
     <div class="container h-full relative overflow-clip">
         <LoaderLine show={isRouting()} />
       <Show when={pathname() !== '/' }>
-        <button class="back-button" onClick={() => navigate(-1)} title="Back">
+        <button class="back-button" onClick={() => navigate(-1, {
+
+          state: {
+            ...location?.state,
+            fromBackButton: true,
+            oldState: location?.state,
+            oldPathname: location?.pathname
+          }
+        })} title="Back">
           <div class="back-button-backdrop"></div>
         <TablerArrowBackUp></TablerArrowBackUp> 
 
@@ -88,11 +97,11 @@ document.addEventListener('dragover', (e) => {
 document.addEventListener('drop', (e) => {
   e.preventDefault();
   e.stopPropagation();
-  console.log(e)
+  // console.log(e)
   
   for (const file of e?.dataTransfer?.files ?? []) {
-    console.log('File(s) dropped');
-    console.log('File: ', file)
+    // console.log('File(s) dropped');
+    // console.log('File: ', file)
     window.postMessage({
       type: 'fileDropped',
       filePath: file.path

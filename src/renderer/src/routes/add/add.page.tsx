@@ -59,7 +59,7 @@ function determineInput(columnName, field, props, navigate, form) {
   if (field.name == 'date') {
     const d = new Date()
     const v = `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`
-    console.log(v, props)
+    // console.log(v, props)
     Input =  <input {...props} type="date" value={v} placeholder={v} default={v} />
   }
 
@@ -101,9 +101,9 @@ function Form (formProps) {
   let desc = currentFileDescription()
 
   const defs = tanstackTableColumnDefsForCurrentTable().slice(1)
-  console.log('DEFS', tanstackTableColumnDefsForCurrentTable())
+  // console.log('DEFS', tanstackTableColumnDefsForCurrentTable())
   createEffect(() => {
-    console.log('FORM: ', unwrap(form))
+    // console.log('FORM: ', unwrap(form))
   })
 
   let columnNames = defs.map(v => v?.accessorKey).filter(key => key !== 'date')
@@ -138,7 +138,7 @@ function UploadArea(args) {
 
 
   createEffect(async () => {
-    console.log('DND FILES', files())
+    // console.log('DND FILES', files())
     if (files().length) {
       // for (let file of files()) {
         const reader = new FileReader();
@@ -146,7 +146,7 @@ function UploadArea(args) {
         if (file) {
           file.path = window.webUtils.getPathForFile(file.file)
           const dataURL = reader.readAsDataURL(file.file)
-          console.log('dataURL', dataURL)
+          // console.log('dataURL', dataURL)
           setPreviewSrc(file.source)
           setValue(args.form, args.field.name, file.file)
         }
@@ -218,9 +218,9 @@ function determineValidator(columnName = '') {
       
       if (!connection || !file) return false
       const data = await connection.query(`SELECT COUNT(*) AS skuCount FROM '${file.name}' WHERE LOWER(TRIM(sku)) = LOWER(TRIM('${value}'));`)
-      console.log('skuCount String', data.toString()) 
+      // console.log('skuCount String', data.toString()) 
       const skuCount = data.toArray().at(0).skuCount
-      console.log('skuCount', skuCount)
+      // console.log('skuCount', skuCount)
       if (skuCount > 0 ) return (
         <div class="field-error">
           UPC already exists. <a href={`/search?query={value}`}>See matches  ›</a>

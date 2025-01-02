@@ -1,3 +1,7 @@
+
+
+
+
 /* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
@@ -308,10 +312,18 @@ h1 {
 .inputShadow {
   filter: drop-shadow(3px 3px 3px oklch(0.95 0.003 93.4 / 0.5));
   /* box-shadow: 1px 1px 4.5px 3px inset oklch(0.98 0.003 93.4 / 0.6), 1.2px 1.2px 30px -30px oklch(0.88 0.003 93.4 / 0.6); */
-  box-shadow: 1px 1px 3.5px 1px inset oklch(0.98 0.003 93.4 / 0.6), 1.2px 1.2px 2px -30px oklch(0.95 0.003 93.4 / 0.4)
+  box-shadow: 1px 1px 3.5px 1px inset oklch(0.975 0.003 93.4 / 0.8), 1.2px 1.2px 2px -30px oklch(0.95 0.003 93.4 / 0.45)
 }
 
+.field-error, .field-error a {
+  padding-left: 2px;
+  padding-top: 1px;
+  color: var(--error-color);
 
+  a:hover {
+      filter:brightness(1.1)
+  }
+}
 
 /* [data-item], [data-item] div {
   transition: none;
@@ -329,3 +341,45 @@ h1 {
 /* :root, html, body, main {
   font-size: 14px;
 } */
+
+
+
+
+
+.checkbox-label {
+  display: flex;
+  place-content: center;
+  border: 1px solid var(--grey-3);
+  width: 20px;
+  /* height: 10px; */
+  aspect-ratio: 1/1;
+  background-color: white;
+  border-radius: 5.2px;
+  cursor: pointer;
+  transition: none;
+  
+  svg {
+    display: none;
+  }
+
+
+  input {
+    display: none;
+
+  }
+}
+
+
+.checkbox-label:has(:checked) {
+  background-color: var(--gold);
+  border-color: oklch(from var(--gold) calc(l * 0.7) c h / 0.5);
+  background-color: oklch(from var(--gold) calc(l * 1) c h / 0.7);
+
+  svg {
+    display: block;
+    color: white;
+    color: oklch(from var(--gold) calc(l * 0.3) calc(c * 1.5) h);
+    /* stroke-width: 1px !important; */
+    transform: scale(1) translateY(0.8px)
+  }
+}

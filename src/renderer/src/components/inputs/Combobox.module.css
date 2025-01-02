@@ -1,5 +1,7 @@
 .combobox {
 	box-sizing: border-box;
+	/* margin-bottom: 1.4rem; */
+	display: block;
 }
 
 

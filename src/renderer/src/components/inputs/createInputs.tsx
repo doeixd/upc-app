@@ -22,6 +22,7 @@ import { Store } from "solid-js/store";
 import { FieldProps } from "@modular-forms/solid";
 import { UploadArea } from "./UploadArea";
 import basicStyles from './BasicStyles.module.css'
+import { combineProps } from "@solid-primitives/props";
 
 function isStore(value: unknown): value is Store<unknown> {
   return (
@@ -44,9 +45,26 @@ export function createFormInputs<F extends ReturnType<typeof createForm<any, any
   //  as {Field: ParentComponent, Form: ParentComponent, FieldArray: ParentComponent}
 
   // type FieldProps = Parameters<typeof Field>[0] & { type?: Maybe<string> }
-  type OurFieldProps = Omit<FieldProps<Record<string, any>, undefined, string>, 'of' | 'children' | 'type'>
+  type OurFieldProps = Omit<FieldProps<Record<string, any>, any, any>, 'of' | 'children' | 'type'>
 
   return {
+    Combobox: (p) => {
+      console.log('COMBBOBOX', p)
+      return (<>
+        <Field name={p.name} validate={p.validate} validateOn={p.validateOn} type={p.type}>
+          {(field, props) => (
+            <Combobox 
+              {...props}
+              {...p} 
+              form={store}
+              field={field}
+              errorValue={field.error} 
+              value={field.value || p.value}
+            />
+          )}
+        </Field>
+      </>)
+    },
     SKU: (p: OurFieldProps) => {
 
       const validators: Maybe<MaybeArray<ValidateField<FieldValue>>> = []
@@ -69,9 +87,9 @@ export function createFormInputs<F extends ReturnType<typeof createForm<any, any
 
         if (!connection || !file) return false
         const data = await connection.query(`SELECT COUNT(*) AS skuCount FROM '${file.name}' WHERE LOWER(TRIM(sku)) = LOWER(TRIM('${value}'));`)
-        console.log('skuCount String', data.toString())
+        // console.log('skuCount String', data.toString())
         const skuCount = data.toArray().at(0).skuCount
-        console.log('skuCount', skuCount)
+        // console.log('skuCount', skuCount)
         if (skuCount > 0) return (
           <div class={basicStyles.error} >
             UPC already exists. <a href={`/search?query={value}`}>See matches  ›</a>
@@ -95,8 +113,14 @@ export function createFormInputs<F extends ReturnType<typeof createForm<any, any
       return (<>
         <Field  {...p} type="string" validateOn="blur">
           {(field, props) => {
+            const combinedProps = combineProps([{
+              type: 'text',
+              name: p.name as string,
+              value: field.value as string | undefined,
+              error: field.error,
+            }, p, props])
             return (
-              <TextField type="text" name={p.name as string} value={field.value as string | undefined} error={field.error} class={'inputShadow'} />
+              <TextField {...combinedProps} type="text" />
             )
           }}
         </Field>
@@ -134,9 +158,9 @@ export function createFormInputs<F extends ReturnType<typeof createForm<any, any
       const validators: Maybe<MaybeArray<ValidateField<FieldValue>>> = []
 
       validators.push((selectedBrands) => {
-        console.log('selectedBrands', selectedBrands)
+        // console.log('selectedBrands', selectedBrands)
         if (!selectedBrands) {
-        console.log('NONE selectedBrands', selectedBrands)
+        // console.log('NONE selectedBrands', selectedBrands)
           return (
             <div class={basicStyles.error}>
               Please select a brand
@@ -164,7 +188,7 @@ export function createFormInputs<F extends ReturnType<typeof createForm<any, any
               //       : field.value
               //     : undefined;
               
-              console.log('brand field value', field.value)
+              // console.log('brand field value', field.value)
             })
 
 

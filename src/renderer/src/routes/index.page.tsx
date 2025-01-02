@@ -36,9 +36,9 @@ function UploadArea(props) {
   const setIsDragging = debounce((value: boolean) => setIsDraggingOg(value), 50);
   
   createEffect(async () => {
-    console.log('input value', inputRef.files)
-    console.log('INPUT PROPS', getInputProps())
-    console.log('DND FILES', files())
+    // console.log('input value', inputRef.files)
+    // console.log('INPUT PROPS', getInputProps())
+    // console.log('DND FILES', files())
     if (files().length) {
       
       // for (let file of files()) {

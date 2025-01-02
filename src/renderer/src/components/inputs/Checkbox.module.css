@@ -10,10 +10,10 @@
 
 .checkbox__control {
   display: block;
-	height: 1.25em;
-	width: 1.25em;
-	border-radius: 16%;
-	border: 1px solid var(--grey-5);
+	height: 1.35em;
+	width: 1.35em;
+	border-radius: 17.5%;
+	border: 1px solid var(--grey-4);
 	background-color: var(--white);
   align-self: center;
 }

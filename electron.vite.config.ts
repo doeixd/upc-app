@@ -51,7 +51,8 @@ export default defineConfig({
             let cur = (node?.path || '')?.match(/\w+(?=$|\.page\.[tj]sx?)/)?.at(0)?.trim()
             // console.log({cur, last, path: node?.path, _new: ('/' + (node?.path || '').replace(/\w+(?=$|\.page\.[tj]sx?)/, '/')).trim().replace(/\/\/+/g, '/') })
             if (cur == last && node?.path) { node.path = ('/' + node.path.replace(/\w+(?=$|\.page\.[tj]sx?)/, '/')).trim().replace(/\/\/+/g, '/')}
-            if (cur) last = cur
+            if (cur && node?.children?.length > 0) last = cur
+            // console.log({cur, last})
             // if (node.component && typeof node.component == 'string') {
             //   console.log('before: ', node.component)
             //   const without = node.component.replace(/\..+$/, '')
@@ -59,7 +60,7 @@ export default defineConfig({
             //   node.component = lazy(() => import(without))
             // }
           })
-          console.log({routes, add: routes?.[2]?.children})
+          console.log({routes, add: routes?.[2]?.children, variants: routes?.[2]?.children?.[1]?.children})
           return routes
         },
         // onClientGenerated(str) {

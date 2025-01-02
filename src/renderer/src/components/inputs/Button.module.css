@@ -1,10 +1,16 @@
 
 
+.button {
+  padding-block: 8px;              
+  padding-inline: 30px;
+  background-color: var(--grey-2);
+  color: var(--grey-9);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border: 0 solid transparent;
+  border-radius: 12px;
+}
 
-export function Button(props) {
-  return (
-    <button class="button">
-      {props.children}
-    </button>
-  )
+.button:hover {
+  background-color: var(--grey-3) ;
 }

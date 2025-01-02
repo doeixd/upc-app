@@ -1,0 +1,127 @@
+
+@property --delay {
+  syntax: '<time>';
+}
+
+@property --bg-color {
+  syntax: '<color>';
+}
+
+
+@keyframes rotateRainbow {
+  from {
+      transform: rotate(0deg) scale(6.5);
+  }
+  to {
+      transform: rotate(360deg) scale(6.5);
+  }
+}
+
+:is(.rainbow-button__content, .rainbow-button__background, .rainbow-button__rainbow) {
+  display: flex;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  height:100%;
+  width: 100%;
+}
+
+.rainbow-button__content {
+  background-color: transparent;
+  color: var(--fg-color);
+  font-size: var(--font-size, 1rem);
+  font-weight: 500;
+  z-index: 2; 
+  /* padding: 8px 20px; */
+  /* display: block; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 11px;
+  transition: all var(--delay) linear;
+  padding: var(--padding);
+  width: var(--width, max-content);
+  height: var(--height, 33px);
+}
+
+.rainbow-button {
+  --border-radius: 12px;
+  --bg-color: oklch(from #fdfdfb calc(l - 0.02) c h / 1);
+  --bg-color-hover: var(--grey-1);
+  --inset-amount: 4px;
+  --fg-color: var(--grey-6);
+  --fg-color-hover: var(--grey-8);
+  --delay: 150ms;
+  --padding: 0;
+  --width: ;
+  /* --height: 40px ; */
+  --margin: 0;
+  align-self: center;
+  margin: var(--margin);
+  /* box-sizing: border-box; */
+  align-items: center;
+  border-width: 0;
+  border: none;
+  /* transition: none; */
+  border-radius: var(--border-radius);
+  /* background-color: oklch(from var(--bg-color) l c h / 0.1); */
+  background-color: transparent;
+  /* border-color: transparent; */
+  /* border-color: green; */
+  position: relative;
+  z-index: 2;
+  overflow: clip;
+  /* border-style: solid; */
+  /* transition: none; */
+  justify-content: center;
+  transition: background-color 0 linear;
+
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  box-sizing: content-box;
+
+
+
+
+  .rainbow-button__background {
+    background-color: oklch(from var(--bg-color) l calc(c + 0.001) h / 1);
+    transition: 
+      color var(--delay) linear,
+      clip-path var(--delay) linear,
+      background-color var(--delay) linear;
+    clip-path: inset(0);
+  }
+
+  &:hover {
+    .rainbow-button__content {
+      color: var(--fg-color-hover);
+      z-index: 1;
+    }
+
+    .rainbow-button__rainbow {
+      background-image: conic-gradient(red, yellow, green, cyan, blue, #fe08fe, red); 
+      animation: rotateRainbow 2.5s linear alternate-reverse infinite;
+      transform: scale(7.6);
+      /* animation-composition: accumulate; */
+    }
+
+    .rainbow-button__background {
+      clip-path: inset(var(--inset-amount) round calc(var(--border-radius) - (var(--inset-amount) - 0.2px))); 
+      background-color: var(--bg-color-hover);
+    }
+  }
+
+
+  svg {
+    display: inline;
+    transform: scale(0.88) translateX(0px) translateY(0px);
+    transition: none;
+
+    path {
+      transition: none;
+      stroke-width: 1.5;
+    }
+    /* transform: translateY(-1px); */
+  }
+}

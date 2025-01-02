@@ -1,6 +1,8 @@
 
 .inputContainer {
-  /* margin-bottom: 23px; */
+  /* margin-bottom: 1rem;
+  margin-top: 1.4rem; */
+  display: block;
 }
 
 .input {
@@ -12,7 +14,7 @@
   padding-left: 10px;
   font-size: 1.1em;
   min-width: 31ch;
-  height: 2.48rem;
+  height: 2.7rem;
 }
 
 .label {

@@ -9,7 +9,7 @@ export function useDelayedRoutingIndicator(delay = 200) {
   const scheduled = createScheduled(fn => throttle(fn, delay));
 
   createEffect(() => {
-    console.log('OG isRouting', isRouting())
+    // console.log('OG isRouting', isRouting())
   })
   createEffect(() => {
 

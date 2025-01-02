@@ -25,7 +25,7 @@ import { createFormInputs } from "@renderer/components/inputs/createInputs"
 function handleSubmit(navigate, [values, event]) {
   navigate(`/add/variants`, { state: values })
   
-  console.log('SUBMITTED', 'values ', values, 'event ', event)
+  // console.log('SUBMITTED', 'values ', values, 'event ', event)
 
 }
 
@@ -49,7 +49,7 @@ export function AddForm(formProps) {
   const Inputs = createFormInputs(formInfo)
 
   // let desc = currentFileDescription()
-  console.log('DEFS', tanstackTableColumnDefsForCurrentTable())
+  // console.log('DEFS', tanstackTableColumnDefsForCurrentTable())
   // createEffect(() => {
   //   console.log('FORM: ', unwrap(form))
   // })
@@ -58,11 +58,11 @@ export function AddForm(formProps) {
 
   return (
     <div class="form-holder">
-      <Form onSubmit={(...values) => handleSubmit(navigate, values)} shouldActive={true} shouldFocus={true}>
+      <Form onSubmit={(...values) => handleSubmit(navigate, values)} shouldActive={true} shouldFocus={true} class="flex gap-5 flex-col">
         <For each={columnNames}>
           {(columnName) => {
             return (<>
-              <div class="pb-[26px]">
+              <div class="">
                 <Switch fallback={<Inputs.Text name={columnName} />}>
                   <Match when={columnName == 'date'}>
                     <Inputs.Date name={columnName} />
